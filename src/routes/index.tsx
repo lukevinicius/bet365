@@ -10,6 +10,7 @@ import { ForgotPassword } from '@/app/forgot-password'
 import { SignUp } from '@/app/sign-up'
 import { PlayerDetail } from '@/app/back-office/player-detail'
 import { Casino } from '@/app/casino'
+import { LeaguesByCountry } from '@/app/sports/leagues-by-country'
 
 export function RoutesWeb() {
   return (
@@ -40,6 +41,17 @@ export function RoutesWeb() {
             <Header />
             <SportsRoutes>
               <Home />
+            </SportsRoutes>
+          </>
+        }
+      />
+      <Route
+        path="/sports/:sportId"
+        element={
+          <>
+            <Header />
+            <SportsRoutes>
+              <LeaguesByCountry />
             </SportsRoutes>
           </>
         }

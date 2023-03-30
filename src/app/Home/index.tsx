@@ -19,7 +19,7 @@ export function Home() {
   return (
     <div className="flex w-auto relative items-stretch h-full min-w-0">
       <div className="flex items-stretch w-full h-full">
-        <div className={`sticky  overflow-auto w-full overscroll-none`}>
+        <div className={`sticky overflow-auto w-full overscroll-none`}>
           <aside className="shadow-[0 0 20px rgba(0,0,0,0.05)] w-full">
             <div
               className={`bg-[rgb(61,61,61)] grid space-x-1 space-y-1 ${
@@ -33,15 +33,9 @@ export function Home() {
               <div className={`${!isWideVersion && 'p-1'}`}>
                 {isWideVersion && <SportsList />}
               </div>
-              <div>
-                <BestLeagues />
-              </div>
-              <div>
-                <MatchesInPlay />
-              </div>
-              <div>
-                <GamesByBestLeague />
-              </div>
+              <BestLeagues />
+              <MatchesInPlay />
+              <GamesByBestLeague />
             </div>
           </aside>
         </div>

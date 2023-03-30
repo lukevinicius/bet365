@@ -16,7 +16,7 @@ export function SidebarNav() {
   return (
     <Stack spacing="5" className="items-start w-full">
       <NavSection title="Lista completa">
-        <NavLink src={sport1} href="#">
+        <NavLink src={sport1} href="/sports/1">
           Futebol
         </NavLink>
         <NavLink src={sport2} href="#">
