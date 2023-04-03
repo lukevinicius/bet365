@@ -52,11 +52,17 @@ export function Header() {
                 <Profile />
               ) : (
                 <div className="flex space-x-3 text-center whitespace-nowrap mx-2">
-                  <Button colorScheme="orange" as={Link} to="/sign-up">
+                  <Button
+                    colorScheme="orange"
+                    size="md"
+                    as={Link}
+                    to="/sign-up"
+                  >
                     Registra-se
                   </Button>
                   <Button
                     colorScheme="green"
+                    size="md"
                     onClick={() => setIsModalSignInOpen(true)}
                   >
                     Login
@@ -68,7 +74,7 @@ export function Header() {
           </div>
         ) : (
           <div className="flex flex-wrap h-full items-center w-full">
-            <div className="flex-1  justify-start">
+            <div className="flex-1 justify-start">
               <Logo />
             </div>
             <nav className="space-x-5">
@@ -95,12 +101,18 @@ export function Header() {
                 <Profile />
               ) : (
                 <div className="flex space-x-2 justify-end">
-                  <Button as={Link} to="/sign-up" colorScheme="orange">
+                  <Button
+                    as={Link}
+                    to="/sign-up"
+                    size="sm"
+                    colorScheme="orange"
+                  >
                     Registra-se
                   </Button>
                   <Button
                     className="text-sm font-medium"
                     colorScheme="green"
+                    size="sm"
                     onClick={() => setIsModalSignInOpen(true)}
                   >
                     Login

@@ -56,7 +56,12 @@ export function LeaguesByCountry() {
               allowMultiple
             >
               <AccordionItem>
-                <AccordionButton className="bg-[#838383]">
+                <AccordionButton
+                  className="bg-[#838383]"
+                  _hover={{
+                    bg: '#838383',
+                  }}
+                >
                   <Box as="span" flex="1" textAlign="left">
                     {country.countryName}
                   </Box>
