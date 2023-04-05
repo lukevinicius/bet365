@@ -11,6 +11,8 @@ import { SignUp } from '@/app/sign-up'
 import { PlayerDetail } from '@/app/back-office/player-detail'
 import { Casino } from '@/app/casino'
 import { LeaguesByCountry } from '@/app/sports/leagues-by-country'
+import { MatchesByLeague } from '@/app/sports/matches-by-league'
+import { MyBets } from '@/app/my-bets'
 
 export function RoutesWeb() {
   return (
@@ -22,6 +24,15 @@ export function RoutesWeb() {
           <>
             <Header />
             <ForgotPassword />
+          </>
+        }
+      />
+      <Route
+        path={'/mb'}
+        element={
+          <>
+            <Header />
+            <MyBets />
           </>
         }
       />
@@ -52,6 +63,17 @@ export function RoutesWeb() {
             <Header />
             <SportsRoutes>
               <LeaguesByCountry />
+            </SportsRoutes>
+          </>
+        }
+      />
+      <Route
+        path="/sports/soccer/:leagueId"
+        element={
+          <>
+            <Header />
+            <SportsRoutes>
+              <MatchesByLeague />
             </SportsRoutes>
           </>
         }

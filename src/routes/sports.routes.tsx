@@ -3,11 +3,15 @@ import { Footer } from '@/components/Footer'
 import { Sidebar } from '@/components/Siderbar'
 import { useAuth } from '@/hooks/useAuth'
 import { Link } from '@chakra-ui/react'
+import { BetSummary } from '@/components/Modals/BetSummary'
+import { useBet } from '@/hooks/useBet'
 
 // import { BetSummary } from '../components/BetSummary';
 
 export function SportsRoutes({ children }: { children: React.ReactNode }) {
   const { user } = useAuth()
+  const { selectedMatch } = useBet()
+
   return (
     <>
       {window.location.pathname !== '/back-office' &&
@@ -29,7 +33,7 @@ export function SportsRoutes({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </div>
-      {/* <BetSummary /> */}
+      {selectedMatch.length > 0 && <BetSummary />}
     </>
   )
 }

@@ -24,10 +24,15 @@ export function Sidebar() {
     return (
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay>
-          <DrawerContent className="bg-[rgb(61,61,61)] p-2 text-white">
+          <DrawerContent className="text-white">
             <DrawerCloseButton className="mt-6 focus:outline-none" />
-            <DrawerHeader>Navegação</DrawerHeader>
-            <DrawerBody className="py-5 px-0" onClick={() => onClose()}>
+            <DrawerHeader className="bg-[rgb(61,61,61)]">
+              Navegação
+            </DrawerHeader>
+            <DrawerBody
+              className="py-5 px-0 bg-[rgb(61,61,61)]"
+              onClick={() => onClose()}
+            >
               <SidebarNav />
             </DrawerBody>
           </DrawerContent>

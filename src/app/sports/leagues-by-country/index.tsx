@@ -9,7 +9,9 @@ import {
   AccordionIcon,
   Box,
   Link,
+  useBreakpointValue,
 } from '@chakra-ui/react'
+import { api } from '@/services/api/axios'
 
 interface League {
   id: number
@@ -25,21 +27,21 @@ export function LeaguesByCountry() {
   const [data, setData] = useState<Data[]>([])
 
   async function findLeagues() {
-    await fetch(
-      `http://localhost:3333/find-leagues` +
-        '?' +
-        new URLSearchParams({
+    await api
+      .get('/find-leagues', {
+        params: {
           sportId: '1',
-        }),
-      {
-        method: 'GET',
-      },
-    ).then((res) => {
-      res.json().then((data) => {
-        setData(data)
+        },
       })
-    })
+      .then((response) => {
+        setData(response.data)
+      })
   }
+
+  const isWideVersion = useBreakpointValue({
+    base: true,
+    lg: false,
+  })
 
   useEffect(() => {
     findLeagues()
@@ -67,16 +69,22 @@ export function LeaguesByCountry() {
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
-                <AccordionPanel p={4} className="bg-[#646464]">
+                <AccordionPanel
+                  className={`grid ${
+                    isWideVersion ? 'grid-cols-1' : 'grid-cols-3'
+                  } py-2 bg-[#646464]`}
+                >
                   {country.leagues.map((league) => (
                     <Link
                       _hover={{
                         textDecoration: 'none',
                         color: 'orange',
                       }}
+                      py={2}
                       as={LinkDom}
-                      to="#"
+                      to={`/sports/soccer/${league.id}`}
                       key={league.id}
+                      className="text-sm"
                     >
                       {league.name}
                     </Link>

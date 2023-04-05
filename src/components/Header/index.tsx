@@ -32,7 +32,7 @@ export function Header() {
       >
         {!isWideVersion ? (
           <div className="flex flex-wrap w-full items-center">
-            <div className="flex items-center justify-around">
+            <div className="flex w-1/5 items-center justify-around">
               <IconButton
                 icon={<Icon as={RiMenuLine} />}
                 variant="unstyled"
@@ -41,36 +41,39 @@ export function Header() {
                 fontSize={24}
                 aria-label="Open navigation"
               />
-              <p className="text-center">Ao Vivo</p>
             </div>
+            <p className="w-1/5">Ao Vivo</p>
 
-            <div className="flex-1 justify-center text-center">
+            <div className="flex w-1/5 justify-center text-center">
               <Logo />
             </div>
-            <div className={`flex items-center md:ml-auto`}>
-              {user.token ? (
-                <Profile />
-              ) : (
-                <div className="flex space-x-3 text-center whitespace-nowrap mx-2">
+            {user.token ? (
+              <Profile />
+            ) : (
+              <>
+                <div className="flex w-1/5 justify-center">
                   <Button
+                    variant={isWideVersion ? 'solid' : ''}
                     colorScheme="orange"
-                    size="md"
+                    size="sm"
                     as={Link}
                     to="/sign-up"
                   >
-                    Registra-se
+                    Registrar
                   </Button>
+                </div>
+                <div className="flex w-1/5 justify-center">
                   <Button
                     colorScheme="green"
-                    size="md"
+                    size="sm"
                     onClick={() => setIsModalSignInOpen(true)}
                   >
                     Login
                   </Button>
                 </div>
-              )}
-              {/* <NotificationsNav /> */}
-            </div>
+              </>
+            )}
+            {/* <NotificationsNav /> */}
           </div>
         ) : (
           <div className="flex flex-wrap h-full items-center w-full">
@@ -87,6 +90,9 @@ export function Header() {
               <ActiveLink href="/casino">
                 <p>Cassino</p>
               </ActiveLink>
+              {/* <ActiveLink href="/mb">
+                <p>Minhas Apostas</p>
+              </ActiveLink> */}
               {/* <ActiveLink href="#">
                 <p>E-Sports</p>
               </ActiveLink>
