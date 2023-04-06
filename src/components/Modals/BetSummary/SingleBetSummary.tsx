@@ -1,22 +1,9 @@
+import { IMatch } from '@/domain/interfaces/IMatch'
 import { useBet } from '@/hooks/useBet'
 import { Box, Flex, HStack, Text } from '@chakra-ui/react'
 import { RiCloseLine } from 'react-icons/ri'
 
-interface Match {
-  id: string
-  localTeam: string
-  visitorTeam: string
-  date: string
-  time: string
-  market: {
-    id: string
-    name: string
-    option: string
-    odd: string
-  }
-}
-
-export function SingleBetSummary(match: Match) {
+export function SingleBetSummary(match: IMatch) {
   const { handleRemoveMatch } = useBet()
 
   return (

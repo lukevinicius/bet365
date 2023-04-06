@@ -1,23 +1,11 @@
-interface Match {
-  id: string
-  localTeam: string
-  visitorTeam: string
-  date: string
-  time: string
-  market: {
-    id: string
-    name: string
-    option: string
-    odd: string
-  }
-}
+import { IMatch } from '@/domain/interfaces/IMatch'
 
 export interface IBet {
   id: string
   stake: number
   jackpot: number
   status: string
-  matches: Match[]
+  matches: IMatch[]
   createdAt: Date
   updatedAt: Date
 }

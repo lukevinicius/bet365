@@ -110,6 +110,7 @@ export function BetSummary() {
             {selectedMatch.length === 1 && (
               <SingleBetSummary
                 id={selectedMatch[0].id}
+                leagueId={selectedMatch[0].leagueId}
                 localTeam={selectedMatch[0].localTeam}
                 visitorTeam={selectedMatch[0].visitorTeam}
                 market={selectedMatch[0].market}

@@ -1,19 +1,5 @@
+import { IMatch } from '@/domain/interfaces/IMatch'
 import { useContext, createContext } from 'react'
-
-interface Match {
-  id: string
-  leagueId: string
-  localTeam: string
-  visitorTeam: string
-  date: string
-  time: string
-  market: {
-    id: string
-    name: string
-    option: string
-    odd: string
-  }
-}
 
 interface BetContextData {
   bet: {
@@ -21,14 +7,14 @@ interface BetContextData {
     stake: number
     jackpot: number
     status: string
-    matches: Match[]
+    matches: IMatch[]
     createdAt: Date
     updatedAt: Date
   }
-  selectedMatch: Match[]
-  handleRemoveMatch(match: Match): void
+  selectedMatch: IMatch[]
+  handleRemoveMatch(match: IMatch): void
   handleRemoveAllMatches(): void
-  selectMarket(match: Match): void
+  selectMarket(match: IMatch): void
   findBets(): Promise<void>
 }
 

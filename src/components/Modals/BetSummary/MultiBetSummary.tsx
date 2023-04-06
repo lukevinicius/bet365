@@ -1,3 +1,4 @@
+import { IMatch } from '@/domain/interfaces/IMatch'
 import { useBet } from '@/hooks/useBet'
 import {
   Accordion,
@@ -12,22 +13,8 @@ import {
 } from '@chakra-ui/react'
 import { RiCloseLine } from 'react-icons/ri'
 
-interface Match {
-  id: string
-  localTeam: string
-  visitorTeam: string
-  date: string
-  time: string
-  market: {
-    id: string
-    name: string
-    option: string
-    odd: string
-  }
-}
-
 interface MultiBetSummaryProps {
-  matches: Match[]
+  matches: IMatch[]
 }
 
 export function MultiBetSummary({ matches }: MultiBetSummaryProps) {

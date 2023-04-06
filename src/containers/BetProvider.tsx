@@ -2,25 +2,11 @@ import { ReactNode, useState } from 'react'
 
 import { BetContext } from '@/hooks/useBet'
 import { api } from '@/services/api/axios'
+import { IMatch } from '@/domain/interfaces/IMatch'
 // import { api } from '@/services/api/axios'
 
 interface BetProviderProps {
   children: ReactNode
-}
-
-interface Match {
-  id: string
-  leagueId: string
-  localTeam: string
-  visitorTeam: string
-  date: string
-  time: string
-  market: {
-    id: string
-    name: string
-    option: string
-    odd: string
-  }
 }
 
 interface Bet {
@@ -28,21 +14,21 @@ interface Bet {
   stake: number
   jackpot: number
   status: string
-  matches: Match[]
+  matches: IMatch[]
   createdAt: Date
   updatedAt: Date
 }
 
 export function BetProvider({ children }: BetProviderProps) {
   const [bet, setBet] = useState<Bet>({} as Bet)
-  const [selectedMatch, setSelectedMatch] = useState<Match[]>([])
+  const [selectedMatch, setSelectedMatch] = useState<IMatch[]>([])
 
   async function findBets() {
     const { data } = await api.get('/bets')
     setBet(data)
   }
 
-  function selectMarket(match: Match) {
+  function selectMarket(match: IMatch) {
     const matchExists = selectedMatch.find((m) => m.id === match.id)
 
     if (matchExists) {
@@ -54,7 +40,7 @@ export function BetProvider({ children }: BetProviderProps) {
     }
   }
 
-  function handleRemoveMatch(match: Match) {
+  function handleRemoveMatch(match: IMatch) {
     const updatedMatch = selectedMatch.filter((m) => m.id !== match.id)
 
     setSelectedMatch(updatedMatch)
