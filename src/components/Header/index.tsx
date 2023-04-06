@@ -104,9 +104,11 @@ export function Header() {
               <ActiveLink href="/casino">
                 <p>Cassino</p>
               </ActiveLink>
-              <ActiveLink href="/mb">
-                <p>Minhas Apostas</p>
-              </ActiveLink>
+              {user.token && (
+                <ActiveLink href="/mb">
+                  <p>Minhas Apostas</p>
+                </ActiveLink>
+              )}
               {/* <ActiveLink href="#">
                 <p>E-Sports</p>
               </ActiveLink>

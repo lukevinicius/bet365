@@ -35,7 +35,10 @@ export function Profile() {
                 onClick={() => findBalance()}
               />
               <p className="ml-2 text-sm">
-                R$ {user.wallet.balance.toFixed(2)}
+                {user.wallet.balance.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                })}
               </p>
             </div>
             <Link href="/me/bank/deposit">
@@ -62,7 +65,10 @@ export function Profile() {
             <Avatar size="xs" name={user.name} />
           </Button>
           <Text className="whitespace-nowrap text-sm" whiteSpace="nowrap">
-            R$ {user.wallet.balance.toFixed(2)}
+            {user.wallet.balance.toLocaleString('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            })}
           </Text>
         </Stack>
       )}

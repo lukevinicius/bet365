@@ -56,7 +56,10 @@ export function DrawerProfile({
                     onClick={() => findBalance()}
                   />
                   <p className="font-bold ml-2">
-                    R$ {wallet.balance.toFixed(2)}
+                    {wallet.balance.toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                    })}
                   </p>
                 </div>
               </div>
@@ -74,11 +77,21 @@ export function DrawerProfile({
             <div className="flex space-x-10 mb-5 px-5">
               <div>
                 <p className="font-[0.8rem]">Disponivel</p>
-                <p className="font-bold">R$ {wallet.balance.toFixed(2)}</p>
+                <p className="font-bold">
+                  {wallet.balance.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
+                </p>
               </div>
               <div>
                 <p className="font-[0.8rem]">Créditos de Aposta</p>
-                <p className="font-bold">R$ {wallet.courtesy.toFixed(2)}</p>
+                <p className="font-bold">
+                  {wallet.courtesy.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
+                </p>
               </div>
             </div>
             <Divider color="gray.200" size="1" />
