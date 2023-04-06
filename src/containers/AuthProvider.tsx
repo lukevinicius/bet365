@@ -11,6 +11,11 @@ interface AuthProviderProps {
   children: ReactNode
 }
 
+interface Wallet {
+  balance: number
+  courtesy: number
+}
+
 interface User {
   id: string
   name: string
@@ -88,6 +93,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
     redirect('/home')
   }
 
+  async function updateWallet(wallet: Wallet) {
+    setUser({
+      ...user,
+      wallet: {
+        balance: wallet.balance,
+        courtesy: wallet.courtesy,
+      },
+    })
+
+    await sessionStorage.setItem(userStorageKey, JSON.stringify(user))
+  }
+
   async function findBalance() {}
 
   useEffect(() => {
@@ -109,6 +126,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       value={{
         user,
         isAuthenticated,
+        updateWallet,
         findBalance,
         signIn,
         signOut,

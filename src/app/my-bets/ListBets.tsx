@@ -50,7 +50,8 @@ export function ListBets({ bets }: Props) {
 
                   <p className="text-sm">{match.market.name}</p>
                   <p className="text-sm">
-                    {match.localTeam} x {match.visitorTeam} - {match.date}
+                    {match.localTeam} x {match.visitorTeam} - {match.date}{' '}
+                    {match.time}
                   </p>
                 </div>
               ))}

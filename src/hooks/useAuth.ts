@@ -5,6 +5,11 @@ export interface SignInCredentials {
   password: string
 }
 
+interface Wallet {
+  balance: number
+  courtesy: number
+}
+
 interface AuthContextData {
   user: {
     id: string
@@ -20,6 +25,7 @@ interface AuthContextData {
   }
   isAuthenticated: boolean
   signIn: (credentials: SignInCredentials) => Promise<void>
+  updateWallet: (wallet: Wallet) => Promise<void>
   findBalance(): Promise<void>
   signOut: () => void
 }

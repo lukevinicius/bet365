@@ -30,7 +30,7 @@ type CreateTicketFormData = z.infer<typeof createTicketSchema>
 
 export function BetSummary() {
   const toast = useToast()
-  const { user } = useAuth()
+  const { user, updateWallet } = useAuth()
   const { company } = useCompany()
   const { selectedMatch, handleRemoveAllMatches } = useBet()
   const [isModalSignInOpen, setIsModalSignInOpen] = useState(false)
@@ -68,8 +68,9 @@ export function BetSummary() {
           matches: selectedMatch,
         })
         .then((response) => {
-          if (response.status === 201) {
+          if (response.status === 200) {
             handleRemoveAllMatches()
+            updateWallet(response.data)
             toast({
               title: 'Aposta realizada com sucesso!',
               status: 'success',
