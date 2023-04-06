@@ -8,18 +8,19 @@ import sport20 from '@/assets/images/sports/20.svg'
 import sport40 from '@/assets/images/sports/40.svg'
 import sport117 from '@/assets/images/sports/117.svg'
 import eSports from '@/assets/images/sports/eSports.svg'
+import { Link } from 'react-router-dom'
 
 export function SportsList() {
   return (
     <div className="flex my-2 mx-2 space-x-4 overflow-auto scrollbar-none">
-      <div className="text-center justify-center text-[#fff]">
+      <Link to="/sports/1" className="text-center justify-center text-[#fff]">
         <Image
           src={sport1}
           className="block m-auto h-[40px] w-[40px]"
           alt="sport1"
         />
         <p>Futebol</p>
-      </div>
+      </Link>
       <div className="text-center justify-center text-[#fff]">
         <Image
           src={sport2}

@@ -17,7 +17,7 @@ export function ActiveLink({ children, ...rest }: ActiveLinkProps) {
 
   const classNameActive = isActive
     ? 'font-bold text-white border-b-2 border-orange-600 inline-block'
-    : 'text-gray-300 inline-block'
+    : 'text-gray-300 inline-block break-keep whitespace-normal'
 
   return (
     <Link as={DomLink} to={rest.href} {...rest} className={classNameActive}>

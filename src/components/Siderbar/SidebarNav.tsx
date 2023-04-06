@@ -43,6 +43,12 @@ export function SidebarNav() {
         <NavLink src={eSports} href="#">
           E-Sports
         </NavLink>
+        <NavLink src={eSports} href="#">
+          Voleibol
+        </NavLink>
+        <NavLink src={eSports} href="#">
+          Futsal
+        </NavLink>
       </NavSection>
     </Stack>
   )

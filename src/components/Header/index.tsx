@@ -42,13 +42,27 @@ export function Header() {
                 aria-label="Open navigation"
               />
             </div>
-            <p className="w-1/5">Ao Vivo</p>
+
+            <div className="w-1/5 text-center">
+              <ActiveLink className="w-1/5" href="/#">
+                <p className="text-sm">Ao Vivo</p>
+              </ActiveLink>
+            </div>
 
             <div className="flex w-1/5 justify-center text-center">
               <Logo />
             </div>
             {user.token ? (
-              <Profile />
+              <>
+                <div className="w-1/5 text-center">
+                  <ActiveLink className="w-1/5" href="/mb">
+                    <p className="text-sm">Minhas Apostas</p>
+                  </ActiveLink>
+                </div>
+                <div className="flex w-1/5 justify-center items-end">
+                  <Profile />
+                </div>
+              </>
             ) : (
               <>
                 <div className="flex w-1/5 justify-center">
@@ -90,9 +104,9 @@ export function Header() {
               <ActiveLink href="/casino">
                 <p>Cassino</p>
               </ActiveLink>
-              {/* <ActiveLink href="/mb">
+              <ActiveLink href="/mb">
                 <p>Minhas Apostas</p>
-              </ActiveLink> */}
+              </ActiveLink>
               {/* <ActiveLink href="#">
                 <p>E-Sports</p>
               </ActiveLink>

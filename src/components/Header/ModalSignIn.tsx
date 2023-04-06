@@ -26,11 +26,6 @@ interface ModalSignInProps {
   onClose: () => void
 }
 
-type SignInFormProps = {
-  username: string
-  password: string
-}
-
 const signInFormSchema = z.object({
   username: z.string().min(1),
   password: z
@@ -39,15 +34,17 @@ const signInFormSchema = z.object({
     .max(20, { message: 'Senha deve ter no máximo 20 caracteres' }),
 })
 
+type SignInFormData = z.infer<typeof signInFormSchema>
+
 export function ModalSignIn({ isOpen, onClose }: ModalSignInProps) {
-  const { register, handleSubmit, formState } = useForm<SignInFormProps>({
+  const { register, handleSubmit, formState } = useForm<SignInFormData>({
     resolver: zodResolver(signInFormSchema),
   })
   const { signIn } = useAuth()
   const [errorMessage, setErrorMessage] = useState('')
 
-  const handleSignIn: SubmitHandler<SignInFormProps> = async (
-    data: SignInFormProps,
+  const handleSignIn: SubmitHandler<SignInFormData> = async (
+    data: SignInFormData,
   ) => {
     await signIn(data)
       .then(() => {

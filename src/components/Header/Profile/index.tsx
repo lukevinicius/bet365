@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import {
   Avatar,
-  Box,
   Flex,
   Text,
   Button,
@@ -24,27 +23,27 @@ export function Profile() {
   })
 
   return (
-    <Flex align="center">
+    <Flex align="end">
       {isWideVersion ? (
         <>
-          <Box mr="2" textAlign="right">
-            <Box display="flex" alignItems="center">
+          <div className="mr-2 text-right">
+            <div className="flex items-center">
               <Icon
                 cursor="pointer"
                 as={RiRestartLine}
                 fontSize="0.85rem"
                 onClick={() => findBalance()}
               />
-              <Text fontSize="0.85rem" ml="2">
+              <p className="ml-2 text-sm">
                 R$ {user.wallet.balance.toFixed(2)}
-              </Text>
-            </Box>
+              </p>
+            </div>
             <Link href="/me/bank/deposit">
-              <p className="text-[0.7rem] font-bold cursor-pointer text-gray-100 hover:text-gray-300">
+              <p className="text-sm font-bold cursor-pointer text-gray-100 hover:text-gray-300">
                 Depositar
               </p>
             </Link>
-          </Box>
+          </div>
           <Button
             _focus={{ outline: 'none' }}
             variant="link"
@@ -60,9 +59,9 @@ export function Profile() {
             variant="link"
             onClick={() => setOpenModal(true)}
           >
-            <Avatar size="sm" name={user.name} />
+            <Avatar size="xs" name={user.name} />
           </Button>
-          <Text className="whitespace-nowrap font-[0.7rem]" whiteSpace="nowrap">
+          <Text className="whitespace-nowrap text-sm" whiteSpace="nowrap">
             R$ {user.wallet.balance.toFixed(2)}
           </Text>
         </Stack>

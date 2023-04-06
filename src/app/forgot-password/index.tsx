@@ -5,18 +5,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-interface ForgotPasswordFormProps {
-  username: string
-}
-
 const forgotPasswordFormSchema = z.object({
   username: z.string(),
 })
 
-interface ResetPasswordFormProps {
-  password: string
-  passwordConfirmation: string
-}
+type ForgotPasswordFormData = z.infer<typeof forgotPasswordFormSchema>
 
 const resetPasswordFormSchema = z
   .object({
@@ -28,15 +21,18 @@ const resetPasswordFormSchema = z
     path: ['passwordConfirmation'],
   })
 
+type ResetPasswordFormData = z.infer<typeof resetPasswordFormSchema>
+
 export function ForgotPassword() {
   const path = window.location.pathname.split('/').pop()
 
-  const { register, handleSubmit, formState } =
-    useForm<ForgotPasswordFormProps>({
+  const { register, handleSubmit, formState } = useForm<ForgotPasswordFormData>(
+    {
       resolver: zodResolver(forgotPasswordFormSchema),
-    })
+    },
+  )
 
-  const handleForgotPassword: SubmitHandler<ForgotPasswordFormProps> = async (
+  const handleForgotPassword: SubmitHandler<ForgotPasswordFormData> = async (
     data,
   ) => {
     api.post('/auth/forgot-password', data)
@@ -46,11 +42,11 @@ export function ForgotPassword() {
     register: registerReset,
     handleSubmit: handleSubmitReset,
     formState: formStateReset,
-  } = useForm<ResetPasswordFormProps>({
+  } = useForm<ResetPasswordFormData>({
     resolver: zodResolver(resetPasswordFormSchema),
   })
 
-  const handleResetPassword: SubmitHandler<ResetPasswordFormProps> = async (
+  const handleResetPassword: SubmitHandler<ResetPasswordFormData> = async (
     data,
   ) => {
     api.put('/auth/reset-password', {

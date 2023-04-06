@@ -13,6 +13,7 @@ import { Casino } from '@/app/casino'
 import { LeaguesByCountry } from '@/app/sports/leagues-by-country'
 import { MatchesByLeague } from '@/app/sports/matches-by-league'
 import { MyBets } from '@/app/my-bets'
+import { Footer } from '@/components/Footer'
 
 export function RoutesWeb() {
   return (
@@ -33,6 +34,7 @@ export function RoutesWeb() {
           <>
             <Header />
             <MyBets />
+            <Footer />
           </>
         }
       />
