@@ -52,7 +52,7 @@ export function MatchesByLeague() {
   }, [])
 
   return (
-    <div className="h-[calc(100vh_-_70px)]">
+    <div>
       {
         <Table>
           <thead>

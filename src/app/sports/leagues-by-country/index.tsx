@@ -48,7 +48,7 @@ export function LeaguesByCountry() {
   }, [])
 
   return (
-    <div className="h-[calc(100vh_-_70px)]">
+    <div>
       {data &&
         data.map((country) => (
           <div key={country.countryName}>

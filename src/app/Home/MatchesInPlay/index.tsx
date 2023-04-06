@@ -15,7 +15,7 @@ export function MatchesInPlay() {
           </div>
         </div>
         <div className="flex border-b-[1px] border-[#6e6e6e]">
-          <div className="w-1/2 h-16 py-1 px-5 border-r-[1px] border-[#6e6e6e] bg-[#646464]">
+          <div className="w-1/2 h-16 py-1 px-3 border-r-[1px] border-[#6e6e6e] bg-[#646464]">
             <div className="flex space-x-3 items-center">
               <div className="text-[0.8rem]">
                 <p>11:34</p>
