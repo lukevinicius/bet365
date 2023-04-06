@@ -42,7 +42,7 @@ export function ListBets({ bets }: Props) {
             <AccordionPanel px={0} pb={4}>
               <hr className="border-[#5d5d5d]" />
               {bet.matches.map((match) => (
-                <div key={match.staticId} className="px-4 mt-3">
+                <div key={match.id} className="px-4 mt-3">
                   <div className="flex justify-between">
                     <p className="font-bold">{match.market.option}</p>
                     <p>{match.market.odd}</p>

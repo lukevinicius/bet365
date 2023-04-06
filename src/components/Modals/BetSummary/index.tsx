@@ -109,7 +109,7 @@ export function BetSummary() {
           <Flex bgColor="gray.100" borderRadius="5px 5px 0 0" flexDir="column">
             {selectedMatch.length === 1 && (
               <SingleBetSummary
-                staticId={selectedMatch[0].staticId}
+                id={selectedMatch[0].id}
                 localTeam={selectedMatch[0].localTeam}
                 visitorTeam={selectedMatch[0].visitorTeam}
                 market={selectedMatch[0].market}

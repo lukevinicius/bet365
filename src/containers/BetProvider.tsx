@@ -9,7 +9,8 @@ interface BetProviderProps {
 }
 
 interface Match {
-  staticId: string
+  id: string
+  leagueId: string
   localTeam: string
   visitorTeam: string
   date: string
@@ -42,12 +43,10 @@ export function BetProvider({ children }: BetProviderProps) {
   }
 
   function selectMarket(match: Match) {
-    const matchExists = selectedMatch.find((m) => m.staticId === match.staticId)
+    const matchExists = selectedMatch.find((m) => m.id === match.id)
 
     if (matchExists) {
-      const updatedMatch = selectedMatch.filter(
-        (m) => m.staticId !== match.staticId,
-      )
+      const updatedMatch = selectedMatch.filter((m) => m.id !== match.id)
 
       setSelectedMatch([...updatedMatch, match])
     } else {
@@ -56,9 +55,7 @@ export function BetProvider({ children }: BetProviderProps) {
   }
 
   function handleRemoveMatch(match: Match) {
-    const updatedMatch = selectedMatch.filter(
-      (m) => m.staticId !== match.staticId,
-    )
+    const updatedMatch = selectedMatch.filter((m) => m.id !== match.id)
 
     setSelectedMatch(updatedMatch)
   }

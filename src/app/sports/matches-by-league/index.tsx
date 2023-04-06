@@ -9,7 +9,7 @@ interface IResponse {
   matches: {
     day: string
     match: {
-      staticId: string
+      id: string
       localTeam: string
       visitorTeam: string
       time: string
@@ -75,7 +75,7 @@ export function MatchesByLeague() {
                 <>
                   {match.match.map((match) => (
                     <tr
-                      key={match.staticId}
+                      key={match.id}
                       className="border-b-[1px] h-10 border-[#6e6e6e]"
                     >
                       <>
@@ -101,7 +101,7 @@ export function MatchesByLeague() {
                             ${
                               selectedMatch.find(
                                 (item) =>
-                                  item.staticId === match.staticId &&
+                                  item.id === match.id &&
                                   item.market.option === odd.name,
                               )
                                 ? 'bg-[#B1B1B1]'
@@ -110,7 +110,8 @@ export function MatchesByLeague() {
                           w-1/6 text-center text-[#FFDF1B] cursor-pointer`}
                           onClick={() =>
                             selectMarket({
-                              staticId: match.staticId,
+                              id: match.id,
+                              leagueId: data.leagueId,
                               localTeam: match.localTeam,
                               visitorTeam: match.visitorTeam,
                               date: match.time,

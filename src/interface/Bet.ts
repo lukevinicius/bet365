@@ -1,5 +1,5 @@
 interface Match {
-  staticId: string
+  id: string
   localTeam: string
   visitorTeam: string
   date: string

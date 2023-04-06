@@ -3,7 +3,7 @@ import { Box, Flex, HStack, Text } from '@chakra-ui/react'
 import { RiCloseLine } from 'react-icons/ri'
 
 interface Match {
-  staticId: string
+  id: string
   localTeam: string
   visitorTeam: string
   date: string

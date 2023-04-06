@@ -1,7 +1,8 @@
 import { useContext, createContext } from 'react'
 
 interface Match {
-  staticId: string
+  id: string
+  leagueId: string
   localTeam: string
   visitorTeam: string
   date: string

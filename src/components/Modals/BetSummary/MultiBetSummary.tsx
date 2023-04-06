@@ -13,7 +13,7 @@ import {
 import { RiCloseLine } from 'react-icons/ri'
 
 interface Match {
-  staticId: string
+  id: string
   localTeam: string
   visitorTeam: string
   date: string
@@ -73,7 +73,7 @@ export function MultiBetSummary({ matches }: MultiBetSummaryProps) {
               {matches.map((tipInfo) => (
                 <Flex
                   color="gray.800"
-                  key={tipInfo.staticId}
+                  key={tipInfo.id}
                   py="1"
                   borderBottom="1px solid gray"
                 >
