@@ -20,7 +20,6 @@ export function MyBets() {
         },
       })
       .then((response) => {
-        console.log(response.data)
         setBets(response.data)
       })
   }
@@ -38,10 +37,10 @@ export function MyBets() {
 
       <TabPanels className="bg-[#505050]">
         <TabPanel p="0">
-          <ListBets bets={bets} />
+          <ListBets bets={bets.filter((bet) => bet.status === 'pending')} />
         </TabPanel>
-        <TabPanel>
-          <p>two!</p>
+        <TabPanel p="0">
+          <ListBets bets={bets.filter((bet) => bet.status !== 'pending')} />
         </TabPanel>
       </TabPanels>
     </Tabs>

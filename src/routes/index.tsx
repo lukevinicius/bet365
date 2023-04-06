@@ -32,8 +32,10 @@ export function RoutesWeb() {
         path={'/mb'}
         element={
           <>
-            <Header />
-            <MyBets />
+            <div className="h-[calc(100vh_-_70px)]">
+              <Header />
+              <MyBets />
+            </div>
             <Footer />
           </>
         }

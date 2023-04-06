@@ -38,7 +38,6 @@ export function MatchesByLeague() {
 
   async function findMatches() {
     const leagueId = window.location.pathname.split('/')
-    console.log(leagueId[3])
     const { data } = await api.get('/find-matches-by-league', {
       params: {
         leagueId: leagueId[3],
@@ -53,7 +52,7 @@ export function MatchesByLeague() {
   }, [])
 
   return (
-    <div>
+    <div className="h-[calc(100vh_-_70px)]">
       {
         <Table>
           <thead>
