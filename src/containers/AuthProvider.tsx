@@ -67,6 +67,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         duration: 5000,
         isClosable: true,
       })
+
+      redirect('/')
     } catch (error) {
       toast({
         title: 'Erro ao fazer login',
