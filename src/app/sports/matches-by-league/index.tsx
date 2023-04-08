@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react'
+
 import { useBet } from '@/hooks/useBet'
 import { api } from '@/services/api/axios'
+
 import { Table, useBreakpointValue } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
 
 interface IResponse {
   leagueId: string
@@ -45,7 +47,11 @@ export function MatchesByLeague() {
       },
     })
 
-    setData(data)
+    setData({
+      leagueId: data.leagueId,
+      league: data.league,
+      matches: data.matches,
+    })
   }
 
   useEffect(() => {
@@ -56,24 +62,26 @@ export function MatchesByLeague() {
     <div>
       {
         <Table>
-          <thead>
-            <tr className="items-center border-b-[1px] h-10 border-[#6e6e6e] bg-[#B1B1B1]">
-              <th className="w-1/2 text-left text-gray-800 font-normal pl-2"></th>
-              <th className="w-1/6 text-center text-gray-800 font-semibold">
-                {isWideVersion ? '1' : 'Casa'}
-              </th>
-              <th className="w-1/6 text-center text-gray-800 font-semibold">
-                {isWideVersion ? 'X' : 'Empate'}
-              </th>
-              <th className="w-1/6 text-center text-gray-800 font-semibold">
-                {isWideVersion ? '2' : 'Visitante'}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.matches &&
-              data.matches.map((match) => (
-                <>
+          {data.matches &&
+            data.matches.map((match) => (
+              <>
+                <thead>
+                  <tr className="items-center border-b-[1px] h-8 border-[#6e6e6e] bg-[#B1B1B1]">
+                    <th className="w-1/2 text-sm text-left text-gray-800 font-normal pl-2">
+                      {match.day}
+                    </th>
+                    <th className="w-1/6 text-sm text-center text-gray-800 font-semibold">
+                      {isWideVersion ? '1' : 'Casa'}
+                    </th>
+                    <th className="w-1/6 text-sm text-center text-gray-800 font-semibold">
+                      {isWideVersion ? 'X' : 'Empate'}
+                    </th>
+                    <th className="w-1/6 text-sm text-center text-gray-800 font-semibold">
+                      {isWideVersion ? '2' : 'Visitante'}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
                   {match.match.map((match) => (
                     <tr
                       key={match.id}
@@ -81,7 +89,7 @@ export function MatchesByLeague() {
                     >
                       <>
                         {isWideVersion ? (
-                          <td className="w-1/2  bg-[#646464] border-r-[1px] pl-2">
+                          <td className="w-1/2  bg-[#646464] border-[#6e6e6e] border-r-[1px] pl-2">
                             <p>{match.localTeam}</p>
                             <p>{match.visitorTeam}</p>
                             <p>{match.time} </p>
@@ -131,9 +139,9 @@ export function MatchesByLeague() {
                       ))}
                     </tr>
                   ))}
-                </>
-              ))}
-          </tbody>
+                </tbody>
+              </>
+            ))}
         </Table>
       }
     </div>

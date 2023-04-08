@@ -28,7 +28,9 @@ export function Header() {
         onClose={() => setIsModalSignInOpen(false)}
       />
       <header
-        className={`flex w-full mx-auto justify-center bg-blue-900 h-16 laptop:h-20 laptop:px-2`}
+        className={`flex w-full mx-auto justify-center bg-blue-900 ${
+          isWideVersion ? 'h-[70px]' : 'h-[50px]'
+        } laptop:px-2`}
       >
         {!isWideVersion ? (
           <div className="flex flex-wrap w-full items-center">
@@ -106,7 +108,7 @@ export function Header() {
               </ActiveLink> */}
               {user.token && (
                 <ActiveLink href="/mb">
-                  <p>Minhas Apostas</p>
+                  <p className="text-sm">Minhas Apostas</p>
                 </ActiveLink>
               )}
               {/* <ActiveLink href="#">

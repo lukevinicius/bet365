@@ -31,10 +31,10 @@ export function Profile() {
               <Icon
                 cursor="pointer"
                 as={RiRestartLine}
-                fontSize="0.85rem"
+                fontSize="0.75rem"
                 onClick={() => findBalance()}
               />
-              <p className="ml-2 text-sm">
+              <p className="ml-2 text-xs">
                 {user.wallet.balance.toLocaleString('pt-BR', {
                   style: 'currency',
                   currency: 'BRL',
@@ -42,7 +42,7 @@ export function Profile() {
               </p>
             </div>
             <Link href="/me/bank/deposit">
-              <p className="text-sm font-bold cursor-pointer text-gray-100 hover:text-gray-300">
+              <p className="text-xs font-bold cursor-pointer text-gray-100 hover:text-gray-300">
                 Depositar
               </p>
             </Link>
@@ -52,7 +52,7 @@ export function Profile() {
             variant="link"
             onClick={() => setOpenModal(true)}
           >
-            <Avatar size="md" name={user.name} />
+            <Avatar size="sm" name={user.name} />
           </Button>
         </>
       ) : (
@@ -64,7 +64,7 @@ export function Profile() {
           >
             <Avatar size="xs" name={user.name} />
           </Button>
-          <Text className="whitespace-nowrap text-sm" whiteSpace="nowrap">
+          <Text className="whitespace-nowrap text-xs" whiteSpace="nowrap">
             {user.wallet.balance.toLocaleString('pt-BR', {
               style: 'currency',
               currency: 'BRL',

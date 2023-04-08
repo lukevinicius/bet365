@@ -14,7 +14,7 @@ export function Logo() {
       fontWeight="bold"
       letterSpacing="tight"
     >
-      <Image src={company.logo} alt="logo-company" className="h-14" />
+      <Image src={company.logo} alt="logo-company" className="h-10" />
     </Link>
   )
 }
