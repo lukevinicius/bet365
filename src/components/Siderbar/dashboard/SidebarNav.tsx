@@ -32,6 +32,9 @@ export function SidebarNav() {
         <NavLink icon={sport117} href="#">
           Boxe
         </NavLink> */}
+        <NavLink icon={RiDownload2Fill} href="/back-office/leagues-management">
+          Gerenciamento de Ligas
+        </NavLink>
         <NavLink icon={RiDownload2Fill} href="/dashboard/users">
           Usuários do Sistema
         </NavLink>

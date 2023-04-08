@@ -33,7 +33,7 @@ export function Home() {
               <div className={`${!isWideVersion && 'p-1'}`}>
                 {isWideVersion && <SportsList />}
               </div>
-              <BestLeagues />
+              {company.bestLeagues && <BestLeagues />}
               <MatchesInPlay />
               <GamesByBestLeague />
             </div>

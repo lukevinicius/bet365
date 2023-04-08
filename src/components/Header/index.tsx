@@ -40,9 +40,10 @@ export function Header() {
                 variant="unstyled"
                 onClick={onOpen}
                 m="0"
-                fontSize={24}
+                fontSize={20}
                 aria-label="Open navigation"
               />
+              <FaSearch size={20} />
             </div>
 
             <div className="w-1/5 text-center">
@@ -120,7 +121,7 @@ export function Header() {
             </nav>
 
             <div className="flex space-x-3 flex-1 justify-end items-center">
-              <FaSearch size={24} />
+              <FaSearch size={20} />
               {user.token ? (
                 <Profile />
               ) : (

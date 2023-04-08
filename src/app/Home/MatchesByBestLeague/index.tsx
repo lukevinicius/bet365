@@ -57,7 +57,7 @@ export function GamesByBestLeague() {
   return (
     <div>
       <div className="bg-blue-900 py-1 px-5 rounded-t-md">
-        <p className="font-bold">Logo - {matches.leagueName}</p>
+        <p className="font-bold">{matches.leagueName}</p>
         <span>Sport - Country</span>
       </div>
       <div>

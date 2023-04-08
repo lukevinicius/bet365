@@ -14,6 +14,7 @@ import { LeaguesByCountry } from '@/app/sports/leagues-by-country'
 import { MatchesByLeague } from '@/app/sports/matches-by-league'
 import { MyBets } from '@/app/my-bets'
 import { Footer } from '@/components/Footer'
+import { LeaguesManagement } from '@/app/back-office/leagues-management'
 
 export function RoutesWeb() {
   return (
@@ -96,6 +97,14 @@ export function RoutesWeb() {
         element={
           <BackOfficeRoutes>
             <BackOffice />
+          </BackOfficeRoutes>
+        }
+      />
+      <Route
+        path="/back-office/leagues-management"
+        element={
+          <BackOfficeRoutes>
+            <LeaguesManagement />
           </BackOfficeRoutes>
         }
       />

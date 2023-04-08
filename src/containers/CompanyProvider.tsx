@@ -3,38 +3,14 @@ import { ReactNode, useEffect, useState } from 'react'
 import { CompanyContext } from '@/hooks/useCompany'
 import { api } from '@/services/api/axios'
 import { setCookie } from 'nookies'
+import { ICompany } from '@/domain/interfaces/ICompany'
 
 interface CompanyProviderProps {
   children: ReactNode
 }
 
-interface Company {
-  id: string
-  name: string
-  logo: string
-  cnpj: string
-  shieldTeams: {
-    image: string
-    link: string
-  }[]
-  banners: {
-    image: string
-    link: string
-  }[]
-  institutional: {
-    instagram?: string
-    youtube?: string
-    facebook?: string
-    twitch?: string
-    tiktok?: string
-    twitter?: string
-    telegram?: string
-    whatsapp?: string
-  }
-}
-
 export function CompanyProvider({ children }: CompanyProviderProps) {
-  const [company, setCompany] = useState<Company>({} as Company)
+  const [company, setCompany] = useState<ICompany>({} as ICompany)
 
   async function findCompany() {
     const { data } = await api.get('/company/by-domain')
@@ -47,7 +23,10 @@ export function CompanyProvider({ children }: CompanyProviderProps) {
       banners: data.banners,
       shieldTeams: data.shieldTeams,
       institutional: data.institutional,
+      bestLeagues: data.leaguesConfig,
     }
+
+    console.log(companyData.bestLeagues)
 
     setCookie(undefined, '@companyId', companyData.id)
 

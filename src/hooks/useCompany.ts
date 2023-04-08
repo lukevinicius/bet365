@@ -1,30 +1,8 @@
+import { ICompany } from '@/domain/interfaces/ICompany'
 import { useContext, createContext } from 'react'
 
 interface CompanyContextData {
-  company: {
-    id: string
-    name: string
-    logo: string
-    cnpj: string
-    shieldTeams: {
-      image?: string
-      link?: string
-    }[]
-    banners: {
-      image: string
-      link: string
-    }[]
-    institutional: {
-      instagram?: string
-      youtube?: string
-      facebook?: string
-      twitch?: string
-      tiktok?: string
-      twitter?: string
-      telegram?: string
-      whatsapp?: string
-    }
-  }
+  company: ICompany
   findCompany(domain: string): Promise<void>
 }
 
