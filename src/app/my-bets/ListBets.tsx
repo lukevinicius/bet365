@@ -35,7 +35,7 @@ export function ListBets({ bets }: Props) {
               </div>
               {bet.status !== 'pending' && (
                 <div className="bg-[#5d5d5d] text-sm p-2 font-bold">
-                  {bet.status === 'win'
+                  {bet.status === 'won'
                     ? `Ganhou R$ ${bet.jackpot.toLocaleString('pt-BR', {
                         style: 'currency',
                         currency: 'BRL',
