@@ -15,7 +15,7 @@ export function BestLeagues() {
             <>
               {league.favorite && (
                 <Link
-                  to={`/leagues/${league.leagueId}`}
+                  to={`/sports/soccer/${league.leagueId}`}
                   key={league.leagueId}
                   className="py-1 px-5 bg-[#646464] border-b-[1px] border-[#6e6e6e] border-r-[1px] hover:bg-[#6e6e6e]"
                 >
