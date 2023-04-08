@@ -17,7 +17,7 @@ export function BestLeagues() {
   return (
     <div>
       <div className="bg-blue-900 font-bold py-1 px-5 rounded-t-md">
-        Logo - Melhores ligas
+        Melhores ligas
       </div>
       <div className={`grid grid-cols-2 bg-[#646464] rounded-b-md`}>
         {leagues.map((league) => {

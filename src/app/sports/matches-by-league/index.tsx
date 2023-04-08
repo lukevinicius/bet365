@@ -12,6 +12,7 @@ interface IResponse {
       id: string
       localTeam: string
       visitorTeam: string
+      date: string
       time: string
       market: {
         id: string
@@ -114,7 +115,7 @@ export function MatchesByLeague() {
                               leagueId: data.leagueId,
                               localTeam: match.localTeam,
                               visitorTeam: match.visitorTeam,
-                              date: match.time,
+                              date: match.date,
                               time: match.time,
                               market: {
                                 id: match.market.id,

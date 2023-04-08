@@ -64,7 +64,7 @@ export function ListBets({ bets }: Props) {
                       size={14}
                     />
                   )}
-                  <div>
+                  <div className="flex-1">
                     <div className="flex justify-between">
                       <p className="font-bold">{match.market.option}</p>
                       <p>{match.market.odd}</p>
