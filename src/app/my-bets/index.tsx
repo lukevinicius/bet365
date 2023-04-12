@@ -1,4 +1,11 @@
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import {
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Spinner,
+} from '@chakra-ui/react'
 import { ListBets } from './ListBets'
 import { useAuth } from '@/hooks/useAuth'
 import { useEffect, useState } from 'react'
@@ -6,7 +13,7 @@ import { api } from '@/services/api/axios'
 import { IBet } from '@/interface/Bet'
 
 export function MyBets() {
-  const { user } = useAuth()
+  const { user, findBalance } = useAuth()
   const [bets, setBets] = useState<IBet[]>([])
 
   async function findBets() {
@@ -20,6 +27,11 @@ export function MyBets() {
         },
       })
       .then((response) => {
+        if (
+          response.data.filter((bet: any) => bet.status === 'won').length > 0
+        ) {
+          findBalance()
+        }
         setBets(response.data)
       })
   }
@@ -29,20 +41,28 @@ export function MyBets() {
   }, [])
 
   return (
-    <Tabs>
-      <TabList className="bg-[#444444]">
-        <Tab>Pendentes</Tab>
-        <Tab>Resolvidas</Tab>
-      </TabList>
+    <>
+      {bets.length > 0 ? (
+        <Tabs>
+          <TabList className="bg-[#444444]">
+            <Tab>Pendentes</Tab>
+            <Tab>Resolvidas</Tab>
+          </TabList>
 
-      <TabPanels className="bg-[#505050]">
-        <TabPanel p="0">
-          <ListBets bets={bets.filter((bet) => bet.status === 'pending')} />
-        </TabPanel>
-        <TabPanel p="0">
-          <ListBets bets={bets.filter((bet) => bet.status !== 'pending')} />
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
+          <TabPanels className="bg-[#505050]">
+            <TabPanel p="0">
+              <ListBets bets={bets.filter((bet) => bet.status === 'pending')} />
+            </TabPanel>
+            <TabPanel p="0">
+              <ListBets bets={bets.filter((bet) => bet.status !== 'pending')} />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      ) : (
+        <div className="text-center">
+          <Spinner size="lg" />
+        </div>
+      )}
+    </>
   )
 }

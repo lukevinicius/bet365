@@ -8,6 +8,7 @@ import {
   Link,
   useBreakpointValue,
   Icon,
+  keyframes,
 } from '@chakra-ui/react'
 import { RiRestartLine } from 'react-icons/ri'
 import { useAuth } from '@/hooks/useAuth'
@@ -16,6 +17,16 @@ import { DrawerProfile } from './DrawerProfile'
 export function Profile() {
   const { user, findBalance } = useAuth()
   const [openModal, setOpenModal] = useState(false)
+  const [isFetching, setIsFetching] = useState(false)
+
+  const spin = keyframes`
+  from { 
+    transform: rotate(0deg); 
+  }
+  to { 
+    transform: rotate(360deg); 
+  }
+`
 
   const isWideVersion = useBreakpointValue<boolean>({
     base: false,
@@ -32,7 +43,11 @@ export function Profile() {
                 cursor="pointer"
                 as={RiRestartLine}
                 fontSize="0.75rem"
-                onClick={() => findBalance()}
+                onClick={async () => {
+                  setIsFetching(true)
+                  await findBalance().finally(() => setIsFetching(false))
+                }}
+                animation={isFetching ? `${spin} 1s infinite linear` : ''}
               />
               <p className="ml-2 text-xs">
                 {user.wallet.balance.toLocaleString('pt-BR', {

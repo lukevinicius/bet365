@@ -26,20 +26,26 @@ interface IMatch {
     id: string
     name: string
   }
-  date: string
+  date: Date
   time: string
   market: IMarket
 }
 
 interface IMatchByDate {
-  date: string
+  date: Date
   matches: IMatch[]
 }
 
 export function Desktop(data: IMatchByDate) {
   return (
     <div>
-      <p className="bg-[#a0a0a0] py-1 px-5 font-bold">{data.date}</p>
+      <p className="bg-[#a0a0a0] py-1 px-5 font-bold">
+        {new Date(data.date).toLocaleDateString('pt-BR', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        })}
+      </p>
       <div>
         {data.matches.map((match) => (
           <div key={match.static_id}>

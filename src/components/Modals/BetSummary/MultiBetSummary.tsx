@@ -67,20 +67,32 @@ export function MultiBetSummary({ matches }: MultiBetSummaryProps) {
                   <Box mx="5" onClick={() => handleRemoveMatch(tipInfo)}>
                     <RiCloseLine cursor="pointer" />
                   </Box>
-                  <Box>
-                    <HStack>
-                      <Text fontWeight="bold" color="gray.900" fontSize="15px">
-                        {tipInfo.market.option}
-                      </Text>
-                      <Text fontWeight="bold" color="blue.900" fontSize="15px">
-                        {tipInfo.market.odd}
-                      </Text>
-                    </HStack>
-                    <Text fontSize="11px">{tipInfo.market.name}</Text>
+                  <div>
+                    {tipInfo.market.map((market) => (
+                      <div key={market.id}>
+                        <HStack>
+                          <Text
+                            fontWeight="bold"
+                            color="gray.900"
+                            fontSize="15px"
+                          >
+                            {market.option}
+                          </Text>
+                          <Text
+                            fontWeight="bold"
+                            color="blue.900"
+                            fontSize="15px"
+                          >
+                            {market.odd}
+                          </Text>
+                        </HStack>
+                        <Text fontSize="11px">{market.name}</Text>
+                      </div>
+                    ))}
                     <Text fontSize="11px">
                       {tipInfo.localTeam} X {tipInfo.visitorTeam}
                     </Text>
-                  </Box>
+                  </div>
                 </Flex>
               ))}
             </AccordionPanel>

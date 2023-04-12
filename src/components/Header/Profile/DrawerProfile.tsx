@@ -10,6 +10,7 @@ import {
   Spacer,
   Icon,
   SimpleGrid,
+  keyframes,
 } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { MdOutlineWatchLater } from 'react-icons/md'
@@ -19,6 +20,7 @@ import {
   RiUserSettingsLine,
   RiWallet3Line,
 } from 'react-icons/ri'
+import { useState } from 'react'
 
 interface IBody {
   username: string
@@ -39,12 +41,22 @@ export function DrawerProfile({
   onClose,
 }: IBody) {
   const { signOut, findBalance } = useAuth()
+  const [isFetching, setIsFetching] = useState(false)
+
+  const spin = keyframes`
+  from { 
+    transform: rotate(0deg); 
+  }
+  to { 
+    transform: rotate(360deg); 
+  }
+`
 
   return (
     <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
       <DrawerOverlay>
         <DrawerContent>
-          <DrawerBody className="bg-white py-5 px-0" color="gray.900">
+          <DrawerBody className="bg-[#5a5a5a] py-5 px-0" color="whiteAlpha.900">
             <div className="flex p-5">
               <div>
                 <p className="font-[0.9rem]">{username}</p>
@@ -53,7 +65,11 @@ export function DrawerProfile({
                     cursor="pointer"
                     as={RiRestartLine}
                     fontSize="0.85rem"
-                    onClick={() => findBalance()}
+                    onClick={async () => {
+                      setIsFetching(true)
+                      await findBalance().finally(() => setIsFetching(false))
+                    }}
+                    animation={isFetching ? `${spin} 1s infinite linear` : ''}
                   />
                   <p className="font-bold ml-2">
                     {wallet.balance.toLocaleString('pt-BR', {
@@ -67,6 +83,7 @@ export function DrawerProfile({
               <Button
                 as={Link}
                 to="/me/bank/deposit"
+                size="sm"
                 variant="outline"
                 leftIcon={<RiDownloadLine />}
                 onClick={() => onClose()}
@@ -85,7 +102,7 @@ export function DrawerProfile({
                 </p>
               </div>
               <div>
-                <p className="font-[0.8rem]">Créditos de Aposta</p>
+                <p className="font-[0.8rem]">Saldo de Bônus</p>
                 <p className="font-bold">
                   {wallet.courtesy.toLocaleString('pt-BR', {
                     style: 'currency',

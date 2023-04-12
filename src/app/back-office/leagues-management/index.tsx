@@ -3,7 +3,7 @@ import { SoccerLeagues } from './Soccer'
 
 export function LeaguesManagement() {
   return (
-    <Tabs>
+    <Tabs bg="gray.800">
       <TabList overflowX="auto" overflowY="hidden">
         <Tab>Futebol</Tab>
         <Tab isDisabled>Basquete</Tab>
@@ -20,7 +20,7 @@ export function LeaguesManagement() {
         <Tab isDisabled>Basquete</Tab>
       </TabList>
       <TabPanels>
-        <TabPanel>
+        <TabPanel p="0">
           <SoccerLeagues />
         </TabPanel>
         <TabPanel>2</TabPanel>

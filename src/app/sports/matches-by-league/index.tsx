@@ -14,7 +14,7 @@ interface IResponse {
       id: string
       localTeam: string
       visitorTeam: string
-      date: string
+      date: Date
       time: string
       market: {
         id: string
@@ -111,28 +111,32 @@ export function MatchesByLeague() {
                               selectedMatch.find(
                                 (item) =>
                                   item.id === match.id &&
-                                  item.market.option === odd.name,
+                                  item.market.find(
+                                    (market) => market.option === odd.name,
+                                  ),
                               )
                                 ? 'bg-[#B1B1B1]'
                                 : 'bg-[#646464] hover:bg-[#6e6e6e] border-r-[1px] border-[#6e6e6e]'
                             }
                           w-1/6 text-center text-[#FFDF1B] cursor-pointer`}
-                          onClick={() =>
+                          onClick={() => {
+                            const market = [
+                              {
+                                id: match.market.id,
+                                name: match.market.name,
+                                option: odd.name,
+                                odd: odd.value,
+                              },
+                            ]
                             selectMarket({
                               id: match.id,
                               leagueId: data.leagueId,
                               localTeam: match.localTeam,
                               visitorTeam: match.visitorTeam,
                               date: match.date,
-                              time: match.time,
-                              market: {
-                                id: match.market.id,
-                                name: match.market.name,
-                                option: odd.name,
-                                odd: odd.value,
-                              },
+                              market,
                             })
-                          }
+                          }}
                         >
                           {odd.value}
                         </td>

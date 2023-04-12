@@ -5,7 +5,7 @@ export interface IBet {
   stake: number
   jackpot: number
   status: string
-  matches: IMatch[]
+  bets: IMatch[]
   createdAt: Date
   updatedAt: Date
 }

@@ -1,5 +1,5 @@
 import {
-  Box,
+  Checkbox,
   HStack,
   Link,
   SimpleGrid,
@@ -128,6 +128,15 @@ export function SoccerLeagues() {
           isClosable: true,
         })
       })
+      .catch((err) => {
+        toast({
+          title: 'Erro',
+          description: `${err}`,
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        })
+      })
   }
 
   useEffect(() => {
@@ -147,9 +156,9 @@ export function SoccerLeagues() {
         <div>
           {leaguesByCountry.map((country) => (
             <div key={country.countryName}>
-              {/* <div className="flex justify-between p-3">
-                <Text>{country.countryName}</Text>
-                <Form.Switch
+              <div className="flex justify-between p-3">
+                <p>{country.countryName}</p>
+                {/* <Switch
                   checked={country.status}
                   onChange={() =>
                     handleUpdateStatusCountry({
@@ -157,8 +166,8 @@ export function SoccerLeagues() {
                       status: country.status,
                     })
                   }
-                />
-              </div> */}
+                /> */}
+              </div>
               <SimpleGrid
                 bg="gray.700"
                 p="5"
@@ -167,24 +176,37 @@ export function SoccerLeagues() {
                 spacing={3}
               >
                 {country.leagues.map((league) => (
-                  <Box display="flex" alignItems="center" key={league.id}>
+                  <div className="flex items-center" key={league.id}>
                     <HStack spacing="3">
-                      {/* <Form.Check
-                        checked={league.status}
-                        value={league.leagueId}
-                        onChange={() =>
-                          handleUpdateStatusLeague({
-                            country: country.countryName,
-                            name: league.name,
-                            leagueId: league.leagueId,
-                            status: league.status,
-                          })
+                      <Checkbox
+                        checked={
+                          company.bestLeagues &&
+                          company.bestLeagues.find(
+                            (bestLeague) =>
+                              bestLeague.leagueId === league.id &&
+                              bestLeague.status,
+                          )?.status
                         }
-                      /> */}
+                        value={league.id}
+                        /* onChange={() =>
+                          handleUpdateFavoriteLeague({
+                            country: country.countryName,
+                            leagueId: league.id,
+                            name: league.name,
+                            status: !(
+                              company.bestLeagues &&
+                              company.bestLeagues.find(
+                                (bestLeague) =>
+                                  bestLeague.leagueId === league.id &&
+                                  bestLeague.status,
+                              )
+                            ),
+                          })
+                        } */
+                      />
                       <div
                         className="cursor-pointer"
                         onClick={() => {
-                          console.log('teste')
                           handleUpdateFavoriteLeague({
                             country: country.countryName,
                             leagueId: league.id,
@@ -220,7 +242,7 @@ export function SoccerLeagues() {
                     >
                       {league.name}
                     </Link>
-                  </Box>
+                  </div>
                 ))}
               </SimpleGrid>
             </div>

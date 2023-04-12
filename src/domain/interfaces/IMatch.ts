@@ -3,13 +3,13 @@ export interface IMatch {
   leagueId: string
   localTeam: string
   visitorTeam: string
-  date: string
-  time: string
+  date: Date
   status?: string
   market: {
     id: string
     name: string
     option: string
+    status?: string
     odd: string
-  }
+  }[]
 }

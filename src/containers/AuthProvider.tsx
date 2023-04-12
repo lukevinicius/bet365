@@ -107,7 +107,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
     await sessionStorage.setItem(userStorageKey, JSON.stringify(user))
   }
 
-  async function findBalance() {}
+  async function findBalance() {
+    const { data } = await api.get('/get-wallet-by-user', {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+      params: {
+        userId: user.id,
+      },
+    })
+    updateWallet(data)
+  }
 
   useEffect(() => {
     async function loadUserStorageDate() {

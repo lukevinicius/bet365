@@ -1,5 +1,15 @@
 import { useAuth } from '@/hooks/useAuth'
-import { Button, Icon, IconButton, useBreakpointValue } from '@chakra-ui/react'
+import {
+  Button,
+  Icon,
+  IconButton,
+  Menu,
+  useBreakpointValue,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Image,
+} from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
@@ -122,6 +132,39 @@ export function Header() {
 
             <div className="flex space-x-3 flex-1 justify-end items-center">
               <FaSearch size={20} />
+              {/* Avatares para escolha de linguagem com foto do País */}
+              <Menu>
+                <MenuButton p="0">
+                  <Image
+                    alt="active-flag"
+                    src="https://www.zbets.com.br/assets/plus2/ic-id-pt-br.svg"
+                  />
+                </MenuButton>
+                <MenuList p="0">
+                  <MenuItem className="space-x-2">
+                    <Image
+                      alt="pt-br"
+                      src="https://www.zbets.com.br/assets/plus2/ic-id-pt-br.svg"
+                    />
+                    <span>Português</span>
+                  </MenuItem>
+                  <MenuItem className="space-x-2">
+                    <Image
+                      alt="en-us"
+                      src="https://www.zbets.com.br/assets/plus2/ic-id-en.svg"
+                    />
+                    <span>English</span>
+                  </MenuItem>
+                  {/* <MenuItem className="space-x-2">
+                    <Avatar
+                      size="sm"
+                      name="es-es"
+                      src="https://www.flagsapi.com/ES/flat/64.png"
+                    />
+                    <span>Español</span>
+                  </MenuItem> */}
+                </MenuList>
+              </Menu>
               {user.token ? (
                 <Profile />
               ) : (

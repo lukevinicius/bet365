@@ -40,9 +40,9 @@ export function BetSummary() {
     lg: false,
   })
 
-  const jackpot = selectedMatch.reduce((acc, match) => {
-    return acc * Number(match.market.odd)
-  }, 0)
+  /* const jackpot = selectedMatch.reduce((acc, match) => {
+    return acc + match.market.odds
+  }, 0) */
 
   const createTicketForm = useForm<CreateTicketFormData>({
     resolver: zodResolver(createTicketSchema),
@@ -72,6 +72,7 @@ export function BetSummary() {
             handleRemoveAllMatches()
             updateWallet(response.data)
             toast({
+              position: 'top',
               title: 'Aposta realizada com sucesso!',
               status: 'success',
               duration: 5000,
@@ -116,7 +117,6 @@ export function BetSummary() {
                 visitorTeam={selectedMatch[0].visitorTeam}
                 market={selectedMatch[0].market}
                 date={selectedMatch[0].date}
-                time={selectedMatch[0].time}
               />
             )}
             {selectedMatch.length > 1 && (
@@ -148,9 +148,9 @@ export function BetSummary() {
                 ) : (
                   <div>
                     Fazer Aposta
-                    <p className="text-xs font-normal">
+                    {/* <p className="text-xs font-normal">
                       {Number(jackpot) > 0 && `Retorno R$ ${jackpot}`}
-                    </p>
+                    </p> */}
                   </div>
                 )}
               </button>

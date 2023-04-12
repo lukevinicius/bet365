@@ -31,11 +31,11 @@ export function ListBets({ bets }: Props) {
                   style: 'currency',
                   currency: 'BRL',
                 })}{' '}
-                {bet.matches.length > 1 ? 'Multipla' : 'Simples'}
+                {bet.bets.length > 1 ? 'Multipla' : 'Simples'}
               </div>
               {bet.status !== 'pending' && (
                 <div className="bg-[#5d5d5d] text-sm p-2 font-bold">
-                  {bet.status === 'won'
+                  {bet.status === 'won' || bet.status === 'paid'
                     ? `Ganhou R$ ${bet.jackpot.toLocaleString('pt-BR', {
                         style: 'currency',
                         currency: 'BRL',
@@ -46,7 +46,7 @@ export function ListBets({ bets }: Props) {
             </AccordionButton>
             <AccordionPanel px={0} pb={4}>
               <hr className="border-[#5d5d5d]" />
-              {bet.matches.map((match) => (
+              {bet.bets.map((match) => (
                 <div key={match.id} className="flex px-4 mt-3">
                   {match.status === 'won' ? (
                     <RiCheckboxCircleFill
@@ -65,15 +65,26 @@ export function ListBets({ bets }: Props) {
                     />
                   )}
                   <div className="flex-1">
-                    <div className="flex justify-between">
-                      <p className="font-bold">{match.market.option}</p>
-                      <p>{match.market.odd}</p>
-                    </div>
+                    {match.market.map((market) => (
+                      <>
+                        <div className="flex justify-between">
+                          <p className="font-bold">{market.option}</p>
+                          <p>{Number(market.odd).toFixed(2)}</p>
+                        </div>
+                        <p className="text-sm">{market.name}</p>
+                      </>
+                    ))}
 
-                    <p className="text-sm">{match.market.name}</p>
                     <p className="text-sm">
-                      {match.localTeam} x {match.visitorTeam} - {match.date}{' '}
-                      {match.time}
+                      {match.localTeam} x {match.visitorTeam} -{' '}
+                      {new Date(match.date).toLocaleDateString('pt-BR', {
+                        day: 'numeric',
+                        month: 'numeric',
+                        year: 'numeric',
+                        hour12: false,
+                        hour: 'numeric',
+                        minute: 'numeric',
+                      })}
                     </p>
                   </div>
                 </div>

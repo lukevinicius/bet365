@@ -39,7 +39,13 @@ interface IMatchByDate {
 export function Mobile(data: IMatchByDate) {
   return (
     <div>
-      <p className="bg-[#a0a0a0] py-1 px-5 font-bold">{data.date}</p>
+      <p className="bg-[#a0a0a0] py-1 px-5 font-bold">
+        {new Date(data.date).toLocaleDateString('pt-BR', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        })}
+      </p>
       <div className="flex overflow-auto overscroll-none">
         {data.matches.map((match) => (
           <div className="w-64" key={match.static_id}>
