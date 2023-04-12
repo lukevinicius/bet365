@@ -4,6 +4,7 @@ import { useBet } from '@/hooks/useBet'
 import { api } from '@/services/api/axios'
 
 import { Table, useBreakpointValue } from '@chakra-ui/react'
+import { formatTimeToUtc } from '@/utils/formatTimeToUtc'
 
 interface IResponse {
   leagueId: string
@@ -14,7 +15,7 @@ interface IResponse {
       id: string
       localTeam: string
       visitorTeam: string
-      date: Date
+      date: string
       time: string
       market: {
         id: string
@@ -133,7 +134,10 @@ export function MatchesByLeague() {
                               leagueId: data.leagueId,
                               localTeam: match.localTeam,
                               visitorTeam: match.visitorTeam,
-                              date: match.date,
+                              date: formatTimeToUtc(
+                                match.date,
+                                match.time,
+                              ).toDate(),
                               market,
                             })
                           }}
