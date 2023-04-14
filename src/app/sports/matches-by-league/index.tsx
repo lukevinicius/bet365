@@ -92,7 +92,7 @@ export function MatchesByLeague() {
                       {isWideVersion ? (
                         <td className="w-1/2  bg-[#646464] border-[#6e6e6e] border-r-[1px] pl-2">
                           <Link
-                            to={`/sports/match/${match.id}`}
+                            to={`/sports/soccer/${data.leagueId}/${match.id}`}
                             className="hover:text-[#FFDF1B]"
                           >
                             <p>{match.localTeam}</p>
@@ -103,7 +103,7 @@ export function MatchesByLeague() {
                       ) : (
                         <td className="w-1/2 bg-[#646464] border-[#6e6e6e] border-r-[1px] pl-2">
                           <Link
-                            to={`/sports/match/${match.id}`}
+                            to={`/sports/soccer/${data.leagueId}/${match.id}`}
                             className="hover:text-[#FFDF1B]"
                           >
                             {match.time} -{' '}
