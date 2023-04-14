@@ -15,11 +15,25 @@ import { MatchesByLeague } from '@/app/sports/matches-by-league'
 import { MyBets } from '@/app/my-bets'
 import { Footer } from '@/components/Footer'
 import { LeaguesManagement } from '@/app/back-office/leagues-management'
+import { Advertising } from '@/app/back-office/bank-settings/advertising'
+import { Account } from '@/app/me/account'
+import { HeaderAccount } from '@/app/me/Header'
+import { MatchById } from '@/app/sports/match-by-id'
 
 export function RoutesWeb() {
   return (
     <Routes>
-      <Route path="*" element={<h1>404</h1>} />
+      <Route
+        path="*"
+        element={
+          <>
+            <Header />
+            <p className="text-center">
+              <strong>404</strong> - Page not found
+            </p>
+          </>
+        }
+      />
       <Route
         path={'/forgot-password/:token' && '/forgot-password'}
         element={
@@ -30,12 +44,33 @@ export function RoutesWeb() {
         }
       />
       <Route
+        path={'/me/account'}
+        element={
+          <>
+            <HeaderAccount />
+            <Account />
+            <Footer />
+          </>
+        }
+      />
+      <Route
         path={'/mb'}
         element={
           <>
             <Header />
             <MyBets />
             <Footer />
+          </>
+        }
+      />
+      <Route
+        path={'/sports/match/:matchId'}
+        element={
+          <>
+            <Header />
+            <SportsRoutes>
+              <MatchById />
+            </SportsRoutes>
           </>
         }
       />
@@ -121,6 +156,14 @@ export function RoutesWeb() {
         element={
           <BackOfficeRoutes>
             <UsersList />
+          </BackOfficeRoutes>
+        }
+      />
+      <Route
+        path="/back-office/bank-settings/advertising"
+        element={
+          <BackOfficeRoutes>
+            <Advertising />
           </BackOfficeRoutes>
         }
       />

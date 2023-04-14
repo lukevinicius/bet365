@@ -35,6 +35,12 @@ export function SidebarNav() {
         <NavLink icon={RiDownload2Fill} href="/back-office/leagues-management">
           Gerenciamento de Ligas
         </NavLink>
+        <NavLink
+          icon={RiDownload2Fill}
+          href="/back-office/bank-settings/advertising"
+        >
+          Publicidade
+        </NavLink>
         <NavLink icon={RiDownload2Fill} href="/back-office/players">
           Jogadores
         </NavLink>

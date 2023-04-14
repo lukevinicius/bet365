@@ -5,6 +5,7 @@ import { api } from '@/services/api/axios'
 
 import { Table, useBreakpointValue } from '@chakra-ui/react'
 import { formatTimeToUtc } from '@/utils/formatTimeToUtc'
+import { Link } from 'react-router-dom'
 
 interface IResponse {
   leagueId: string
@@ -88,22 +89,30 @@ export function MatchesByLeague() {
                       key={match.id}
                       className="border-b-[1px] h-10 border-[#6e6e6e]"
                     >
-                      <>
-                        {isWideVersion ? (
-                          <td className="w-1/2  bg-[#646464] border-[#6e6e6e] border-r-[1px] pl-2">
+                      {isWideVersion ? (
+                        <td className="w-1/2  bg-[#646464] border-[#6e6e6e] border-r-[1px] pl-2">
+                          <Link
+                            to={`/sports/match/${match.id}`}
+                            className="hover:text-[#FFDF1B]"
+                          >
                             <p>{match.localTeam}</p>
                             <p>{match.visitorTeam}</p>
                             <p>{match.time} </p>
-                          </td>
-                        ) : (
-                          <td className="w-1/2 bg-[#646464] border-[#6e6e6e] border-r-[1px] pl-2">
+                          </Link>
+                        </td>
+                      ) : (
+                        <td className="w-1/2 bg-[#646464] border-[#6e6e6e] border-r-[1px] pl-2">
+                          <Link
+                            to={`/sports/match/${match.id}`}
+                            className="hover:text-[#FFDF1B]"
+                          >
                             {match.time} -{' '}
                             <span>
                               {match.localTeam} X {match.visitorTeam}
                             </span>
-                          </td>
-                        )}
-                      </>
+                          </Link>
+                        </td>
+                      )}
                       {match.market.odds.map((odd) => (
                         <td
                           key={odd.name}
