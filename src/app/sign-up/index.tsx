@@ -23,19 +23,6 @@ import { Input } from '@/components/Form/Input'
 import { api } from '@/services/api/axios'
 import { redirect } from 'react-router-dom'
 
-interface CreateUserFormProps {
-  companyId: string
-  username: string
-  name: string
-  document: string
-  password: string
-  password_confirmation: string
-  email: string
-  phone: string
-  birthDate: string
-  affiliate: string
-}
-
 const createUserFormSchema = z.object({
   username: z
     .string()
@@ -47,7 +34,11 @@ const createUserFormSchema = z.object({
   email: z.string().email('O campo precisa ser um email válido'),
   phone: z.string(),
   password: z.string().min(6, 'Mínimo de 6 caracteres'),
+  confirmPassword: z.string().min(6, 'Mínimo de 6 caracteres'),
+  affiliate: z.string().optional(),
 })
+
+type CreateUserFormData = z.infer<typeof createUserFormSchema>
 
 export function SignUp() {
   const { company } = useCompany()
@@ -58,11 +49,11 @@ export function SignUp() {
   const [ageChecked, setAgeChecked] = useState(false)
 
   const { register, handleSubmit, formState, getValues, setValue } =
-    useForm<CreateUserFormProps>({
+    useForm<CreateUserFormData>({
       resolver: zodResolver(createUserFormSchema),
     })
 
-  const handleCreateUser: SubmitHandler<CreateUserFormProps> = async (data) => {
+  const handleCreateUser: SubmitHandler<CreateUserFormData> = async (data) => {
     if (ageChecked) {
       await api
         .post('/users', {

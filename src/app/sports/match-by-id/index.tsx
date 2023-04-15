@@ -41,8 +41,8 @@ interface IMatch {
 
 export function MatchById() {
   const params = window.location.pathname.split('/')
-  const leagueId = params[2]
-  const matchId = params[3]
+  const leagueId = params[3]
+  const matchId = params[4]
   const [match, setMatch] = useState<IMatch>({} as IMatch)
   const [loading, setLoading] = useState(true)
 
