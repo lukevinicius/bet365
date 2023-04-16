@@ -1,4 +1,4 @@
-export function AllMatches() {
+export function AllMarkets() {
   return (
     <div>
       <p>ALl Matches</p>

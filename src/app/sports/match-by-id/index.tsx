@@ -14,6 +14,7 @@ import {
   TabPanel,
   Spinner,
 } from '@chakra-ui/react'
+import { SportsList } from '@/app/Home/SportsList'
 
 interface IMatch {
   sportName: string
@@ -65,7 +66,8 @@ export function MatchById() {
   }, [])
 
   return (
-    <div className="p-2">
+    <div>
+      <SportsList />
       {loading ? (
         <div className="text-center">
           <Spinner size="xl" />
@@ -147,7 +149,7 @@ export function MatchById() {
                               >
                                 {!odd.odds && odd.stop !== 'false' && (
                                   <div
-                                    className="flex flex-1 h-9 justify-center items-center space-x-3 bg-[#646464] hover:bg-[#6e6e6e] 
+                                    className="flex flex-1 h-12 justify-center items-center space-x-3 bg-[#646464] hover:bg-[#6e6e6e] 
                               cursor-pointer"
                                   >
                                     <p>{odd.name}</p>
@@ -203,7 +205,7 @@ export function MatchById() {
                                       {odd.odds.map((oddProps) => {
                                         return (
                                           <div
-                                            className="flex flex-1 h-9 items-center justify-center bg-[#646464] hover:bg-[#6e6e6e] cursor-pointer"
+                                            className="flex flex-1 h-12 items-center justify-center bg-[#646464] hover:bg-[#6e6e6e] cursor-pointer"
                                             key={oddProps.name}
                                           >
                                             <p>

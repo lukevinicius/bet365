@@ -1,3 +1,5 @@
+import { useBet } from '@/hooks/useBet'
+import { formatTimeToUtc } from '@/utils/formatTimeToUtc'
 import 'dayjs/plugin/calendar'
 
 import { Link } from 'react-router-dom'
@@ -21,18 +23,24 @@ interface IMatch {
 }
 
 interface IMatchByDate {
+  leagueId: string
   matches: IMatch[]
 }
 
-export function Mobile({ matches }: IMatchByDate) {
+export function Mobile({ leagueId, matches }: IMatchByDate) {
+  const { selectedMatch, selectMarket } = useBet()
+
   return (
     <div>
       <div className="flex overflow-auto overscroll-none">
         {matches.map((match) => (
           <div className="w-64" key={match.id}>
             <div className="flex w-64 flex-col items-center border-r-[1px] border-[#6e6e6e]">
-              <div className="flex-1 w-full bg-[#646464] py-2 px-5">
-                <Link to="#" className="hover:text-[#ffdf1b]">
+              <div className="w-full bg-[#646464] py-2 px-5">
+                <Link
+                  to={`/sports/soccer/${leagueId}/${match.id}`}
+                  className="hover:text-[#ffdf1b]"
+                >
                   <div className="h-20 space-y-2 text-sm items-center">
                     <div className="text-md">
                       <p>{match.localTeam}</p>
@@ -45,11 +53,38 @@ export function Mobile({ matches }: IMatchByDate) {
                   </div>
                 </Link>
               </div>
-              <div className="flex flex-1 w-full h-16 items-center justify-center">
+              <div className="flex w-full h-16 items-center justify-center">
                 {match.market.odds.map((odd) => (
                   <div
-                    className="flex flex-1 w-full h-16 items-center justify-center p-1 border-r-[1px] bg-[#5a5a5a] hover:bg-[#6e6e6e] border-[#6e6e6e] text-[#ffdf1b]"
                     key={odd.name}
+                    className={`
+                    ${
+                      selectedMatch.find(
+                        (item) =>
+                          item.id === match.id &&
+                          item.market.find(
+                            (market) => market.option === odd.name,
+                          ),
+                      ) && ' bg-[#B1B1B1]'
+                    } flex flex-1 w-full h-16 items-center justify-center p-1 border-r-[1px] bg-[#5a5a5a] border-[#6e6e6e] text-[#ffdf1b]`}
+                    onClick={() => {
+                      const market = [
+                        {
+                          id: match.market.id,
+                          name: match.market.name,
+                          option: odd.name,
+                          odd: odd.value,
+                        },
+                      ]
+                      selectMarket({
+                        id: match.id,
+                        leagueId,
+                        localTeam: match.localTeam,
+                        visitorTeam: match.visitorTeam,
+                        date: formatTimeToUtc(match.date, match.time).toDate(),
+                        market,
+                      })
+                    }}
                   >
                     <p>
                       <span className="text-white opacity-70 mr-1">

@@ -93,12 +93,13 @@ export function GamesByBestLeague({ leagueId }: LeagueProps) {
         {league.matches && (
           <div>
             {isWideVersion ? (
-              <Mobile matches={allMatches} />
+              <Mobile leagueId={league.leagueId} matches={allMatches} />
             ) : (
               <>
                 {league.matches.map((match) => (
                   <Desktop
                     key={match.match[0].id}
+                    leagueId={league.leagueId}
                     date={match.day}
                     matches={match.match}
                   />

@@ -32,6 +32,17 @@ export function BetProvider({ children }: BetProviderProps) {
     const matchExists = selectedMatch.find((m) => m.id === match.id)
 
     if (matchExists) {
+      if (
+        matchExists.market.find(
+          (m) =>
+            m.option === match.market[0].option && m.id === match.market[0].id,
+        )
+      ) {
+        handleRemoveMatch(match)
+
+        return
+      }
+
       const updatedMatch = selectedMatch.filter((m) => m.id !== match.id)
 
       setSelectedMatch([...updatedMatch, match])
