@@ -26,8 +26,6 @@ export function CompanyProvider({ children }: CompanyProviderProps) {
       bestLeagues: data.leaguesConfig,
     }
 
-    console.log(companyData.bestLeagues)
-
     setCookie(undefined, '@companyId', companyData.id)
 
     setCompany(companyData)

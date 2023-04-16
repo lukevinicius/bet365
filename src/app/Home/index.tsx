@@ -35,7 +35,13 @@ export function Home() {
               </div>
               {company.bestLeagues && <BestLeagues />}
               <MatchesInPlay />
-              <GamesByBestLeague />
+              {company.bestLeagues && (
+                <GamesByBestLeague leagueId={company.bestLeagues[0].leagueId} />
+              )}
+              <></>
+              {company.bestLeagues && (
+                <GamesByBestLeague leagueId={company.bestLeagues[1].leagueId} />
+              )}
             </div>
           </aside>
         </div>
