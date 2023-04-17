@@ -28,8 +28,11 @@ export function Home() {
                 `}
             >
               <div className={`${!isWideVersion && 'p-1'}`}>
-                {company.banners && <Carousel banners={company.banners} />}
+                <Carousel banners={[]} />
               </div>
+              {/* <div className={`${!isWideVersion && 'p-1'}`}>
+                {company.banners && <Carousel banners={company.banners} />}
+              </div> */}
               <div className={`${!isWideVersion && 'p-1'}`}>
                 {isWideVersion && <SportsList />}
               </div>
