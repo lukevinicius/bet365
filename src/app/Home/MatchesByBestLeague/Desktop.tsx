@@ -31,22 +31,23 @@ export function Desktop(data: IMatchByDate) {
 
   return (
     <div>
-      <p className="bg-[#a0a0a0] py-1 px-5 font-bold">{data.date}</p>
+      <p className="bg-[#a0a0a0] py-1 px-5 text-zinc-700 text-sm">
+        {data.date}
+      </p>
       <div>
         {data.matches.map((match) => (
           <div key={match.id}>
             <div className="flex items-center border-b-[1px] border-[#6e6e6e]">
-              <div className="w-1/2 h-16 bg-[#646464] py-2 px-5">
+              <div className="w-1/2 h-9 bg-[#646464] py-2 px-5">
                 <Link
                   to={`/sports/soccer/${data.leagueId}/${match.id}`}
-                  className="hover:text-[#ffdf1b]"
+                  className="w-full hover:text-[#ffdf1b]"
                 >
-                  <div className="flex items-center space-x-3">
+                  <div className="flex w-full items-center space-x-3">
                     <div className="text-sm">{match.time}</div>
-                    <div>
-                      <p>{match.localTeam}</p>
-                      <p>{match.visitorTeam}</p>
-                    </div>
+                    <p>
+                      {match.localTeam} x {match.visitorTeam}
+                    </p>
                   </div>
                 </Link>
               </div>
@@ -64,9 +65,10 @@ export function Desktop(data: IMatchByDate) {
                                   ),
                               )
                                 ? 'bg-[#B1B1B1]'
-                                : 'bg-[#646464] hover:bg-[#6e6e6e] border-r-[1px] border-[#6e6e6e]'
+                                : 'bg-[#5A5A5A] hover:bg-[#646464] border-r-[1px] border-[#6e6e6e]'
                             }
-                          flex w-1/3 justify-center items-center h-16 text-[#FFDF1B] cursor-pointer`}
+                          flex flex-1 h-9 justify-center items-center
+                              cursor-pointer text-[#ffdf1b]`}
                     onClick={() => {
                       const market = [
                         {

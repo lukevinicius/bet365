@@ -84,7 +84,7 @@ export function GamesByBestLeague({ leagueId }: LeagueProps) {
   }, [])
 
   return (
-    <div>
+    <div className="m-1">
       <div className="bg-blue-900 py-1 px-5 rounded-t-md">
         <p className="font-bold">{league.league}</p>
         <span>{/* Sport - Country */}</span>
