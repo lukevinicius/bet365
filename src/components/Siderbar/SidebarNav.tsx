@@ -3,6 +3,7 @@ import { Stack } from '@chakra-ui/react'
 import sport1 from '../../assets/images/sports/1.svg'
 import sport2 from '../../assets/images/sports/2.svg'
 import sport3 from '../../assets/images/sports/3.svg'
+import sport5 from '@/assets/images/sports/5.svg'
 import sport6 from '../../assets/images/sports/6.svg'
 import sport20 from '../../assets/images/sports/20.svg'
 import sport23 from '../../assets/images/sports/23.svg'
@@ -20,11 +21,14 @@ export function SidebarNav() {
         <NavLink src={sport1} href={`/sports/${'soccer'}`}>
           Futebol
         </NavLink>
-        <NavLink src={sport2} href="#">
+        <NavLink src={sport2} href={`/sports/${'basketball'}`}>
           Basquete
         </NavLink>
         <NavLink src={sport3} href={`/sports/${'baseball'}`}>
           Basebol
+        </NavLink>
+        <NavLink src={sport5} href={`/sports/${'handball'}`}>
+          Tênis
         </NavLink>
         <NavLink src={sport6} href={`/sports/${'handball'}`}>
           Handebol
