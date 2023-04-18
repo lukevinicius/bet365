@@ -34,6 +34,7 @@ interface IResponse {
 
 export function MatchesByLeague() {
   const { selectedMatch, selectMarket } = useBet()
+  const sport = window.location.pathname.split('/')[2]
   const [data, setData] = useState<IResponse>({} as IResponse)
 
   const isWideVersion = useBreakpointValue({
@@ -43,7 +44,7 @@ export function MatchesByLeague() {
 
   async function findMatches() {
     const leagueId = window.location.pathname.split('/')
-    const { data } = await api.get('/find-matches-by-league', {
+    const { data } = await api.get(`/${sport}/matches-by-league`, {
       params: {
         leagueId: leagueId[3],
       },
@@ -75,9 +76,11 @@ export function MatchesByLeague() {
                     <th className="w-1/6 text-sm text-center text-gray-800 font-semibold">
                       {isWideVersion ? '1' : 'Casa'}
                     </th>
-                    <th className="w-1/6 text-sm text-center text-gray-800 font-semibold">
-                      {isWideVersion ? 'X' : 'Empate'}
-                    </th>
+                    {match.match[0].market.odds.length > 2 && (
+                      <th className="w-1/6 text-sm text-center text-gray-800 font-semibold">
+                        {isWideVersion ? 'X' : 'Empate'}
+                      </th>
+                    )}
                     <th className="w-1/6 text-sm text-center text-gray-800 font-semibold">
                       {isWideVersion ? '2' : 'Visitante'}
                     </th>
@@ -126,7 +129,7 @@ export function MatchesByLeague() {
                                   ),
                               )
                                 ? 'bg-[#B1B1B1]'
-                                : 'bg-[#646464] hover:bg-[#6e6e6e] border-r-[1px] border-[#6e6e6e]'
+                                : 'bg-[#5A5A5A] hover:bg-[#646464] border-r-[1px] border-[#6e6e6e]'
                             }
                           w-1/6 text-center text-[#FFDF1B] cursor-pointer`}
                           onClick={() => {

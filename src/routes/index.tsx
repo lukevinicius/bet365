@@ -106,7 +106,7 @@ export function RoutesWeb() {
         }
       />
       <Route
-        path="/sports/soccer/:leagueId"
+        path="/sports/:sport/:leagueId"
         element={
           <>
             <Header />

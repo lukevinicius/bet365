@@ -5,7 +5,7 @@ import sport2 from '../../assets/images/sports/2.svg'
 import sport3 from '../../assets/images/sports/3.svg'
 import sport6 from '../../assets/images/sports/6.svg'
 import sport20 from '../../assets/images/sports/20.svg'
-import sport40 from '../../assets/images/sports/40.svg'
+// import sport40 from '../../assets/images/sports/40.svg'
 import sport117 from '../../assets/images/sports/117.svg'
 import eSports from '../../assets/images/sports/eSports.svg'
 
@@ -16,7 +16,7 @@ export function SidebarNav() {
   return (
     <Stack spacing="5" className="items-start w-full">
       <NavSection title="Lista completa">
-        <NavLink src={sport1} href="/sports/1">
+        <NavLink src={sport1} href={`/sports/${'soccer'}`}>
           Futebol
         </NavLink>
         <NavLink src={sport2} href="#">
@@ -31,14 +31,11 @@ export function SidebarNav() {
         <NavLink src={sport20} href="#">
           Tênis de Mesa
         </NavLink>
-        <NavLink src={sport40} href="#">
+        {/* <NavLink src={sport40} href="#">
           Formula 1
-        </NavLink>
-        <NavLink src={sport117} href="#">
+        </NavLink> */}
+        <NavLink src={sport117} href={`/sports/${'mma'}`}>
           MMA
-        </NavLink>
-        <NavLink src={sport117} href="#">
-          Boxe
         </NavLink>
         <NavLink src={eSports} href="#">
           E-Sports

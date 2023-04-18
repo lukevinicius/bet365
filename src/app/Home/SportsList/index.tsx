@@ -12,8 +12,11 @@ import { Link } from 'react-router-dom'
 
 export function SportsList() {
   return (
-    <div className="flex my-2 mx-2 space-x-4 overflow-auto scrollbar-none">
-      <Link to="/sports/1" className="text-center justify-center text-[#fff]">
+    <div className="flex m-0 py-2 px-1 space-x-4 overflow-auto scrollbar-none">
+      <Link
+        to={`/sports/${'soccer'}`}
+        className="text-center justify-center text-[#fff]"
+      >
         <Image
           src={sport1}
           className="block m-auto h-[40px] w-[40px]"
@@ -61,14 +64,17 @@ export function SportsList() {
         />
         <p className="whitespace-nowrap">Formula 1</p>
       </div>
-      <div className="text-center justify-center text-[#fff]">
+      <Link
+        to={`/sports/${'mma'}`}
+        className="text-center justify-center text-[#fff]"
+      >
         <Image
           src={sport117}
           className="block m-auto h-[40px] w-[40px]"
           alt="sport117"
         />
         <p>MMA</p>
-      </div>
+      </Link>
       <div className="text-center justify-center text-[#fff]">
         <Image
           src={eSports}

@@ -24,18 +24,13 @@ interface Data {
 }
 
 export function LeaguesByCountry() {
+  const sport = window.location.pathname.split('/')[2]
   const [data, setData] = useState<Data[]>([])
 
   async function findLeagues() {
-    await api
-      .get('/find-leagues', {
-        params: {
-          sportId: '1',
-        },
-      })
-      .then((response) => {
-        setData(response.data)
-      })
+    await api.get(`/${sport}/find-leagues`).then((response) => {
+      setData(response.data)
+    })
   }
 
   const isWideVersion = useBreakpointValue({
@@ -82,7 +77,7 @@ export function LeaguesByCountry() {
                       }}
                       py={2}
                       as={LinkDom}
-                      to={`/sports/soccer/${league.id}`}
+                      to={`/sports/${sport}/${league.id}`}
                       key={league.id}
                       className="text-sm"
                     >
