@@ -40,14 +40,17 @@ export function SportsList() {
         />
         <p>Basebol</p>
       </div>
-      <div className="text-center justify-center text-[#fff]">
+      <Link
+        to={`/sports/${'handball'}`}
+        className="text-center justify-center text-[#fff]"
+      >
         <Image
           src={sport6}
           className="block m-auto h-[40px] w-[40px]"
           alt="sport6"
         />
         <p>Handebol</p>
-      </div>
+      </Link>
       <div className="text-center justify-center text-[#fff]">
         <Image
           src={sport20}

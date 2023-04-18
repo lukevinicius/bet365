@@ -57,7 +57,7 @@ export function GamesByBestLeague({ leagueId }: LeagueProps) {
 
   async function getMatches() {
     await api
-      .get('/find-matches-by-league', {
+      .get('/soccer/matches-by-league', {
         params: {
           leagueId,
         },

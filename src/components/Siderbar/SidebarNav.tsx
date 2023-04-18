@@ -25,7 +25,7 @@ export function SidebarNav() {
         <NavLink src={sport3} href="#">
           Basebol
         </NavLink>
-        <NavLink src={sport6} href="#">
+        <NavLink src={sport6} href={`/sports/${'handball'}`}>
           Handebol
         </NavLink>
         <NavLink src={sport20} href="#">
