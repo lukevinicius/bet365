@@ -3,11 +3,12 @@ import { Image } from '@chakra-ui/react'
 import sport1 from '@/assets/images/sports/1.svg'
 import sport2 from '@/assets/images/sports/2.svg'
 import sport3 from '@/assets/images/sports/3.svg'
+import sport5 from '@/assets/images/sports/5.svg'
 import sport6 from '@/assets/images/sports/6.svg'
 import sport20 from '@/assets/images/sports/20.svg'
-import sport40 from '@/assets/images/sports/40.svg'
+// import sport40 from '@/assets/images/sports/40.svg'
 import sport117 from '@/assets/images/sports/117.svg'
-import eSports from '@/assets/images/sports/eSports.svg'
+// import eSports from '@/assets/images/sports/eSports.svg'
 import { Link } from 'react-router-dom'
 
 export function SportsList() {
@@ -24,22 +25,39 @@ export function SportsList() {
         />
         <p>Futebol</p>
       </Link>
-      <div className="text-center justify-center text-[#fff]">
+      <Link
+        to={`/sports/${'basketball'}`}
+        className="text-center justify-center text-[#fff]"
+      >
         <Image
           src={sport2}
           className="block m-auto h-[40px] w-[40px]"
           alt="sport2"
         />
         <p>Basquete</p>
-      </div>
-      <div className="text-center justify-center text-[#fff]">
+      </Link>
+      <Link
+        to={`/sports/${'tennis'}`}
+        className="text-center justify-center text-[#fff]"
+      >
+        <Image
+          src={sport5}
+          className="block m-auto h-[40px] w-[40px]"
+          alt="sport5"
+        />
+        <p>Tênis</p>
+      </Link>
+      <Link
+        to={`/sports/${'baseball'}`}
+        className="text-center justify-center text-[#fff]"
+      >
         <Image
           src={sport3}
           className="block m-auto h-[40px] w-[40px]"
           alt="sport3"
         />
         <p>Basebol</p>
-      </div>
+      </Link>
       <Link
         to={`/sports/${'handball'}`}
         className="text-center justify-center text-[#fff]"
@@ -51,22 +69,25 @@ export function SportsList() {
         />
         <p>Handebol</p>
       </Link>
-      <div className="text-center justify-center text-[#fff]">
+      <Link
+        to={`/sports/${'table-tennis'}`}
+        className="text-center justify-center text-[#fff]"
+      >
         <Image
           src={sport20}
           className="block m-auto h-[40px] w-[40px]"
           alt="sport20"
         />
         <p className="whitespace-nowrap">Tênis de Mesa</p>
-      </div>
-      <div className="text-center justify-center text-[#fff]">
+      </Link>
+      {/* <div className="text-center justify-center text-[#fff]">
         <Image
           src={sport40}
           className="block m-auto h-[40px] w-[40px]"
           alt="sport40"
         />
         <p className="whitespace-nowrap">Formula 1</p>
-      </div>
+      </div> */}
       <Link
         to={`/sports/${'mma'}`}
         className="text-center justify-center text-[#fff]"
@@ -78,14 +99,14 @@ export function SportsList() {
         />
         <p>MMA</p>
       </Link>
-      <div className="text-center justify-center text-[#fff]">
+      {/* <div className="text-center justify-center text-[#fff]">
         <Image
           src={eSports}
           className="block m-auto h-[40px] w-[40px]"
           alt="eSports"
         />
         <p className="whitespace-nowrap">E-Sports</p>
-      </div>
+      </div> */}
     </div>
   )
 }
