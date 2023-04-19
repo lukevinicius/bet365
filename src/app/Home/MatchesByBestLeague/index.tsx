@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { api } from '@/services/api/axios'
-import { useBreakpointValue } from '@chakra-ui/react'
+import { Spinner, useBreakpointValue } from '@chakra-ui/react'
 import { Desktop } from './Desktop'
 import { Mobile } from './Mobile'
 
@@ -54,6 +54,7 @@ interface IResponse {
 export function GamesByBestLeague({ leagueId }: LeagueProps) {
   const [league, setLeague] = useState<IResponse>({} as IResponse)
   const [allMatches, setAllMatches] = useState<IMatch[]>([])
+  const [loading, setLoading] = useState(true)
 
   async function getMatches() {
     await api
@@ -71,6 +72,7 @@ export function GamesByBestLeague({ leagueId }: LeagueProps) {
         setAllMatches(
           response.data.matches.map((match: any) => match.match).flat(),
         )
+        setLoading(false)
       })
   }
 
@@ -85,30 +87,40 @@ export function GamesByBestLeague({ leagueId }: LeagueProps) {
 
   return (
     <div className={isWideVersion ? 'm-0' : 'm-1'}>
-      <div className="bg-blue-900 h-12 py-1 px-5 rounded-t-md">
-        <p className="font-bold p-0 text-sm">{league.name}</p>
-        <span className="text-xs">Futebol - {league.name.split(':')[0]}</span>
-      </div>
-      <div>
-        {league.matches && (
+      {loading ? (
+        <div className="flex justify-center items-center">
+          <Spinner />
+        </div>
+      ) : (
+        <div>
+          <div className="bg-blue-900 h-12 py-1 px-5 rounded-t-md">
+            <p className="font-bold p-0 text-sm">{league.name}</p>
+            <span className="text-xs">
+              Futebol - {league.name.split(':')[0]}
+            </span>
+          </div>
           <div>
-            {isWideVersion ? (
-              <Mobile leagueId={league.leagueId} matches={allMatches} />
-            ) : (
-              <>
-                {league.matches.map((match) => (
-                  <Desktop
-                    key={match.match[0].id}
-                    leagueId={league.leagueId}
-                    date={match.day}
-                    matches={match.match}
-                  />
-                ))}
-              </>
+            {league.matches && (
+              <div>
+                {isWideVersion ? (
+                  <Mobile leagueId={league.leagueId} matches={allMatches} />
+                ) : (
+                  <>
+                    {league.matches.map((match) => (
+                      <Desktop
+                        key={match.match[0].id}
+                        leagueId={league.leagueId}
+                        date={match.day}
+                        matches={match.match}
+                      />
+                    ))}
+                  </>
+                )}
+              </div>
             )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }
