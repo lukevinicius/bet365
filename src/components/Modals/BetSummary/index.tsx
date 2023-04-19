@@ -132,14 +132,18 @@ export function BetSummary() {
             >
               <input
                 {...register('stake')}
-                className="w-1/2 rounded-bl-md border-zinc-300 shadow-sm px-3 py-2 text-zinc-800 focus:outline-none focus:ring-2"
+                className={`w-1/2 ${
+                  !isWideVersion ? 'rounded-br-md' : 'rounded-0'
+                } border-zinc-300 shadow-sm px-3 py-2 text-zinc-800 focus:outline-none focus:ring-2`}
                 placeholder="Valor da Aposta"
                 /* onChange={(e) => handleStakeChange(e.target.value)} */
               />
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-1/2 bg-green-500 text-white rounded-br-md px-3 font-semibold text-sm hover:bg-green-400"
+                className={`w-1/2 bg-green-500 text-white ${
+                  !isWideVersion && 'rounded-br-md'
+                } px-3 font-semibold text-sm hover:bg-green-400`}
               >
                 {isSubmitting ? (
                   <div>
