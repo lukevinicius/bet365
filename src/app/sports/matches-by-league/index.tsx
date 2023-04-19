@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useBet } from '@/hooks/useBet'
 import { api } from '@/services/api/axios'
 
-import { Table, useBreakpointValue } from '@chakra-ui/react'
+import { Spinner, Table, useBreakpointValue } from '@chakra-ui/react'
 import { formatTimeToUtc } from '@/utils/formatTimeToUtc'
 import { Link } from 'react-router-dom'
 import { RiLockFill } from 'react-icons/ri'
@@ -37,6 +37,7 @@ export function MatchesByLeague() {
   const { selectedMatch, selectMarket } = useBet()
   const sport = window.location.pathname.split('/')[2]
   const [data, setData] = useState<IResponse>({} as IResponse)
+  const [loading, setLoading] = useState(true)
 
   const isWideVersion = useBreakpointValue({
     base: true,
@@ -56,6 +57,7 @@ export function MatchesByLeague() {
       league: data.league,
       matches: data.matches,
     })
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -64,7 +66,11 @@ export function MatchesByLeague() {
 
   return (
     <div>
-      {
+      {loading ? (
+        <div className="flex justify-center items-center">
+          <Spinner />
+        </div>
+      ) : (
         <Table>
           {data.matches &&
             data.matches.map((match) => (
@@ -125,18 +131,18 @@ export function MatchesByLeague() {
                         <td
                           key={odd.name}
                           className={`
-                            ${
-                              selectedMatch.find(
-                                (item) =>
-                                  item.id === match.id &&
-                                  item.market.find(
-                                    (market) => market.option === odd.name,
-                                  ),
-                              )
-                                ? 'bg-[#B1B1B1]'
-                                : 'bg-[#5A5A5A] hover:bg-[#646464] border-r-[1px] border-[#6e6e6e]'
-                            }
-                          w-1/6 text-center text-[#FFDF1B] cursor-pointer`}
+                                ${
+                                  selectedMatch.find(
+                                    (item) =>
+                                      item.id === match.id &&
+                                      item.market.find(
+                                        (market) => market.option === odd.name,
+                                      ),
+                                  )
+                                    ? 'bg-[#B1B1B1]'
+                                    : 'bg-[#5A5A5A] hover:bg-[#646464] border-r-[1px] border-[#6e6e6e]'
+                                }
+                              w-1/6 text-center text-[#FFDF1B] cursor-pointer`}
                           onClick={() => {
                             const market = [
                               {
@@ -173,7 +179,7 @@ export function MatchesByLeague() {
               </>
             ))}
         </Table>
-      }
+      )}
     </div>
   )
 }

@@ -141,7 +141,7 @@ export function SoccerLeagues() {
 
   useEffect(() => {
     async function findGames() {
-      await api.get('/soccer/leagues').then((response) => {
+      await api.get('/soccer/find-leagues').then((response) => {
         setLeaguesByCountry(response.data)
         setIsLoading(false)
       })

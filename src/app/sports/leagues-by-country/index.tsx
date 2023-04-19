@@ -10,6 +10,7 @@ import {
   Box,
   Link,
   useBreakpointValue,
+  Spinner,
 } from '@chakra-ui/react'
 import { api } from '@/services/api/axios'
 
@@ -26,10 +27,12 @@ interface Data {
 export function LeaguesByCountry() {
   const sport = window.location.pathname.split('/')[2]
   const [data, setData] = useState<Data[]>([])
+  const [loading, setLoading] = useState(true)
 
   async function findLeagues() {
     await api.get(`/${sport}/find-leagues`).then((response) => {
       setData(response.data)
+      setLoading(false)
     })
   }
 
@@ -44,51 +47,58 @@ export function LeaguesByCountry() {
 
   return (
     <div>
-      {data &&
-        data.map((country) => (
-          <div key={country.countryName}>
-            <Accordion
-              key={country.countryName}
-              defaultIndex={[0]}
-              allowMultiple
-            >
-              <AccordionItem>
-                <AccordionButton
-                  className="bg-[#838383]"
-                  _hover={{
-                    bg: '#838383',
-                  }}
-                >
-                  <Box as="span" flex="1" textAlign="left">
-                    {country.countryName}
-                  </Box>
-                  <AccordionIcon />
-                </AccordionButton>
-                <AccordionPanel
-                  className={`grid ${
-                    isWideVersion ? 'grid-cols-1' : 'grid-cols-3'
-                  } py-2 bg-[#646464]`}
-                >
-                  {country.leagues.map((league) => (
-                    <Link
-                      _hover={{
-                        textDecoration: 'none',
-                        color: 'orange',
-                      }}
-                      py={2}
-                      as={LinkDom}
-                      to={`/sports/${sport}/${league.id}`}
-                      key={league.id}
-                      className="text-sm"
-                    >
-                      {league.name}
-                    </Link>
-                  ))}
-                </AccordionPanel>
-              </AccordionItem>
-            </Accordion>
-          </div>
-        ))}
+      {loading ? (
+        <div className="flex justify-center items-center">
+          <Spinner />
+        </div>
+      ) : (
+        <div>
+          {data.map((country) => (
+            <div key={country.countryName}>
+              <Accordion
+                key={country.countryName}
+                defaultIndex={[0]}
+                allowMultiple
+              >
+                <AccordionItem>
+                  <AccordionButton
+                    className="bg-[#838383]"
+                    _hover={{
+                      bg: '#838383',
+                    }}
+                  >
+                    <Box as="span" flex="1" textAlign="left">
+                      {country.countryName}
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                  <AccordionPanel
+                    className={`grid ${
+                      isWideVersion ? 'grid-cols-1' : 'grid-cols-3'
+                    } py-2 bg-[#646464]`}
+                  >
+                    {country.leagues.map((league) => (
+                      <Link
+                        _hover={{
+                          textDecoration: 'none',
+                          color: 'orange',
+                        }}
+                        py={2}
+                        as={LinkDom}
+                        to={`/sports/${sport}/${league.id}`}
+                        key={league.id}
+                        className="text-sm"
+                      >
+                        {league.name}
+                      </Link>
+                    ))}
+                  </AccordionPanel>
+                </AccordionItem>
+              </Accordion>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
