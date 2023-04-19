@@ -28,7 +28,7 @@ interface IMatch {
 
 interface IResponse {
   leagueId: string
-  league: string
+  name: string
   matches: {
     day: string
     match: {
@@ -65,7 +65,7 @@ export function GamesByBestLeague({ leagueId }: LeagueProps) {
       .then((response) => {
         setLeague({
           leagueId: response.data.leagueId,
-          league: response.data.league,
+          name: response.data.league,
           matches: response.data.matches,
         })
         setAllMatches(
@@ -84,9 +84,9 @@ export function GamesByBestLeague({ leagueId }: LeagueProps) {
   }, [])
 
   return (
-    <div className="m-1">
+    <div className={isWideVersion ? 'm-0' : 'm-1'}>
       <div className="bg-blue-900 py-1 px-5 rounded-t-md">
-        <p className="font-bold">{league.league}</p>
+        <p className="font-bold">{league.name}</p>
         <span>{/* Sport - Country */}</span>
       </div>
       <div>

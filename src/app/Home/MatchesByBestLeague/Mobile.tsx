@@ -1,6 +1,7 @@
 import { useBet } from '@/hooks/useBet'
 import { formatTimeToUtc } from '@/utils/formatTimeToUtc'
 import 'dayjs/plugin/calendar'
+import { RiLockFill } from 'react-icons/ri'
 
 import { Link } from 'react-router-dom'
 
@@ -36,7 +37,7 @@ export function Mobile({ leagueId, matches }: IMatchByDate) {
         {matches.map((match) => (
           <div className="w-64" key={match.id}>
             <div className="flex w-64 flex-col items-center border-r-[1px] border-[#6e6e6e]">
-              <div className="w-full bg-[#646464] py-2 px-5">
+              <div className="w-full bg-[#5a5a5a] py-2 px-5">
                 <Link
                   to={`/sports/soccer/${leagueId}/${match.id}`}
                   className="hover:text-[#ffdf1b]"
@@ -53,7 +54,7 @@ export function Mobile({ leagueId, matches }: IMatchByDate) {
                   </div>
                 </Link>
               </div>
-              <div className="flex w-full h-16 items-center justify-center">
+              <div className="flex w-full h-11 items-center justify-center">
                 {match.market.odds.map((odd) => (
                   <div
                     key={odd.name}
@@ -66,7 +67,7 @@ export function Mobile({ leagueId, matches }: IMatchByDate) {
                             (market) => market.option === odd.name,
                           ),
                       ) && ' bg-[#B1B1B1]'
-                    } flex flex-1 w-full h-16 items-center justify-center p-1 border-r-[1px] bg-[#5a5a5a] border-[#6e6e6e] text-[#ffdf1b]`}
+                    } flex flex-1 w-full h-11 items-center justify-center p-1 bg-[#646464] border-[#6e6e6e] border-r-[1px] text-[#ffdf1b]`}
                     onClick={() => {
                       const market = [
                         {
@@ -76,14 +77,18 @@ export function Mobile({ leagueId, matches }: IMatchByDate) {
                           odd: odd.value,
                         },
                       ]
-                      selectMarket({
-                        id: match.id,
-                        leagueId,
-                        localTeam: match.localTeam,
-                        visitorTeam: match.visitorTeam,
-                        date: formatTimeToUtc(match.date, match.time).toDate(),
-                        market,
-                      })
+                      odd.stop !== 'true' &&
+                        selectMarket({
+                          id: match.id,
+                          leagueId,
+                          localTeam: match.localTeam,
+                          visitorTeam: match.visitorTeam,
+                          date: formatTimeToUtc(
+                            match.date,
+                            match.time,
+                          ).toDate(),
+                          market,
+                        })
                     }}
                   >
                     <p>
@@ -94,7 +99,11 @@ export function Mobile({ leagueId, matches }: IMatchByDate) {
                           ? 'X'
                           : '2'}
                       </span>
-                      {odd.value}
+                      {odd.stop === 'true' ? (
+                        <RiLockFill />
+                      ) : (
+                        <p>{odd.value}</p>
+                      )}
                     </p>
                   </div>
                 ))}

@@ -13,17 +13,17 @@ import { Link } from 'react-router-dom'
 
 export function SportsList() {
   return (
-    <div className="flex m-0 py-2 px-1 space-x-4 overflow-auto scrollbar-none">
+    <div className="flex m-0 py-2 px-1 space-x-4 overflow-auto scrollbar-none bg-[#5a5a5a]">
       <Link
         to={`/sports/${'soccer'}`}
         className="text-center justify-center text-[#fff]"
       >
         <Image
           src={sport1}
-          className="block m-auto h-[40px] w-[40px]"
+          className="block m-auto h-[32px] w-[32px]"
           alt="sport1"
         />
-        <p>Futebol</p>
+        <p className="text-sm">Futebol</p>
       </Link>
       <Link
         to={`/sports/${'basketball'}`}
@@ -31,10 +31,10 @@ export function SportsList() {
       >
         <Image
           src={sport2}
-          className="block m-auto h-[40px] w-[40px]"
+          className="block m-auto h-[32px] w-[32px]"
           alt="sport2"
         />
-        <p>Basquete</p>
+        <p className="text-sm">Basquete</p>
       </Link>
       <Link
         to={`/sports/${'tennis'}`}
@@ -42,10 +42,10 @@ export function SportsList() {
       >
         <Image
           src={sport5}
-          className="block m-auto h-[40px] w-[40px]"
+          className="block m-auto h-[32px] w-[32px]"
           alt="sport5"
         />
-        <p>Tênis</p>
+        <p className="text-sm">Tênis</p>
       </Link>
       <Link
         to={`/sports/${'baseball'}`}
@@ -53,10 +53,10 @@ export function SportsList() {
       >
         <Image
           src={sport3}
-          className="block m-auto h-[40px] w-[40px]"
+          className="block m-auto h-[32px] w-[32px]"
           alt="sport3"
         />
-        <p>Basebol</p>
+        <p className="text-sm">Basebol</p>
       </Link>
       <Link
         to={`/sports/${'handball'}`}
@@ -64,10 +64,10 @@ export function SportsList() {
       >
         <Image
           src={sport6}
-          className="block m-auto h-[40px] w-[40px]"
+          className="block m-auto h-[32px] w-[32px]"
           alt="sport6"
         />
-        <p>Handebol</p>
+        <p className="text-sm">Handebol</p>
       </Link>
       <Link
         to={`/sports/${'table-tennis'}`}
@@ -75,7 +75,7 @@ export function SportsList() {
       >
         <Image
           src={sport20}
-          className="block m-auto h-[40px] w-[40px]"
+          className="block m-auto h-[32px] w-[32px]"
           alt="sport20"
         />
         <p className="whitespace-nowrap">Tênis de Mesa</p>
@@ -83,7 +83,7 @@ export function SportsList() {
       {/* <div className="text-center justify-center text-[#fff]">
         <Image
           src={sport40}
-          className="block m-auto h-[40px] w-[40px]"
+          className="block m-auto h-[32px] w-[32px]"
           alt="sport40"
         />
         <p className="whitespace-nowrap">Formula 1</p>
@@ -94,15 +94,15 @@ export function SportsList() {
       >
         <Image
           src={sport117}
-          className="block m-auto h-[40px] w-[40px]"
+          className="block m-auto h-[32px] w-[32px]"
           alt="sport117"
         />
-        <p>MMA</p>
+        <p className="text-sm">MMA</p>
       </Link>
       {/* <div className="text-center justify-center text-[#fff]">
         <Image
           src={eSports}
-          className="block m-auto h-[40px] w-[40px]"
+          className="block m-auto h-[32px] w-[32px]"
           alt="eSports"
         />
         <p className="whitespace-nowrap">E-Sports</p>

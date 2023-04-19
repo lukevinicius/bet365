@@ -1,5 +1,6 @@
 import { useBet } from '@/hooks/useBet'
 import { formatTimeToUtc } from '@/utils/formatTimeToUtc'
+import { RiLockFill } from 'react-icons/ri'
 import { Link } from 'react-router-dom'
 
 interface IMatch {
@@ -78,17 +79,21 @@ export function Desktop(data: IMatchByDate) {
                           odd: odd.value,
                         },
                       ]
-                      selectMarket({
-                        id: match.id,
-                        leagueId: data.leagueId,
-                        localTeam: match.localTeam,
-                        visitorTeam: match.visitorTeam,
-                        date: formatTimeToUtc(match.date, match.time).toDate(),
-                        market,
-                      })
+                      odd.stop !== 'true' &&
+                        selectMarket({
+                          id: match.id,
+                          leagueId: data.leagueId,
+                          localTeam: match.localTeam,
+                          visitorTeam: match.visitorTeam,
+                          date: formatTimeToUtc(
+                            match.date,
+                            match.time,
+                          ).toDate(),
+                          market,
+                        })
                     }}
                   >
-                    <p>{odd.value}</p>
+                    {odd.stop === 'true' ? <RiLockFill /> : <p>{odd.value}</p>}
                   </div>
                 ))}
               </div>

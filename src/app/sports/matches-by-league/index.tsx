@@ -6,6 +6,7 @@ import { api } from '@/services/api/axios'
 import { Table, useBreakpointValue } from '@chakra-ui/react'
 import { formatTimeToUtc } from '@/utils/formatTimeToUtc'
 import { Link } from 'react-router-dom'
+import { RiLockFill } from 'react-icons/ri'
 
 interface IResponse {
   leagueId: string
@@ -145,20 +146,25 @@ export function MatchesByLeague() {
                                 odd: odd.value,
                               },
                             ]
-                            selectMarket({
-                              id: match.id,
-                              leagueId: data.leagueId,
-                              localTeam: match.localTeam,
-                              visitorTeam: match.visitorTeam,
-                              date: formatTimeToUtc(
-                                match.date,
-                                match.time,
-                              ).toDate(),
-                              market,
-                            })
+                            odd.stop !== 'true' &&
+                              selectMarket({
+                                id: match.id,
+                                leagueId: data.leagueId,
+                                localTeam: match.localTeam,
+                                visitorTeam: match.visitorTeam,
+                                date: formatTimeToUtc(
+                                  match.date,
+                                  match.time,
+                                ).toDate(),
+                                market,
+                              })
                           }}
                         >
-                          {odd.value}
+                          {odd.stop === 'true' ? (
+                            <RiLockFill />
+                          ) : (
+                            <p>{odd.value}</p>
+                          )}
                         </td>
                       ))}
                     </tr>

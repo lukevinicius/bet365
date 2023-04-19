@@ -11,6 +11,7 @@ interface CompanyProviderProps {
 
 export function CompanyProvider({ children }: CompanyProviderProps) {
   const [company, setCompany] = useState<ICompany>({} as ICompany)
+  const companyStorageKey = '@company'
 
   async function findCompany() {
     const { data } = await api.get('/company/by-domain')
@@ -27,15 +28,25 @@ export function CompanyProvider({ children }: CompanyProviderProps) {
     }
 
     setCookie(undefined, '@companyId', companyData.id)
+    await sessionStorage.setItem(companyStorageKey, JSON.stringify(companyData))
 
     setCompany(companyData)
   }
 
   useEffect(() => {
-    if (company.id === undefined) {
-      findCompany()
+    async function loadCompanyStorageDate() {
+      const companyStoraged = await sessionStorage.getItem(companyStorageKey)
+
+      if (companyStoraged) {
+        const companyLogged = JSON.parse(companyStoraged) as ICompany
+        await setCompany(companyLogged)
+      } else {
+        await findCompany()
+      }
     }
-  }, [company.id])
+
+    loadCompanyStorageDate()
+  }, [companyStorageKey])
 
   return (
     <CompanyContext.Provider
