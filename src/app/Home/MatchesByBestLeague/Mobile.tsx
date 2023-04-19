@@ -33,11 +33,11 @@ export function Mobile({ leagueId, matches }: IMatchByDate) {
 
   return (
     <div>
-      <div className="flex overflow-auto overscroll-none">
+      <div className="flex overflow-x-scroll scrollbar-none">
         {matches.map((match) => (
           <div className="w-64" key={match.id}>
-            <div className="flex w-64 flex-col items-center border-r-[1px] border-[#6e6e6e]">
-              <div className="w-full bg-[#5a5a5a] py-2 px-5">
+            <div className="flex w-64 flex-col items-center">
+              <div className="w-full bg-[#5a5a5a] py-2 px-5 border-r-[1px] border-[#6e6e6e]">
                 <Link
                   to={`/sports/soccer/${leagueId}/${match.id}`}
                   className="hover:text-[#ffdf1b]"
@@ -91,18 +91,20 @@ export function Mobile({ leagueId, matches }: IMatchByDate) {
                         })
                     }}
                   >
-                    <p>
-                      <span className="text-white opacity-70 mr-1">
-                        {odd.name === 'Home'
-                          ? '1'
-                          : odd.name === 'Draw'
-                          ? 'X'
-                          : '2'}
-                      </span>
+                    <p className="flex items-center justify-center">
                       {odd.stop === 'true' ? (
                         <RiLockFill />
                       ) : (
-                        <p>{odd.value}</p>
+                        <div className="text-sm">
+                          <span className="text-white mr-1 opacity-70">
+                            {odd.name === 'Home'
+                              ? '1'
+                              : odd.name === 'Draw'
+                              ? 'X'
+                              : '2'}
+                          </span>
+                          <span>{odd.value}</span>
+                        </div>
                       )}
                     </p>
                   </div>

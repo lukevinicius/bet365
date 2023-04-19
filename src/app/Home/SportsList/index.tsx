@@ -13,10 +13,10 @@ import { Link } from 'react-router-dom'
 
 export function SportsList() {
   return (
-    <div className="flex m-0 py-2 px-1 space-x-4 overflow-auto scrollbar-none bg-[#5a5a5a]">
+    <div className="flex m-0 items-center py-2 px-1 space-x-4 overflow-x-scroll scrollbar-none bg-[#5a5a5a]">
       <Link
         to={`/sports/${'soccer'}`}
-        className="text-center justify-center text-[#fff]"
+        className="text-center justify-center text-[#fff] w-20"
       >
         <Image
           src={sport1}

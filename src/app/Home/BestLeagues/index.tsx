@@ -14,8 +14,8 @@ export function BestLeagues() {
   return (
     <div className={isWideVersion ? 'm-0' : 'm-1'}>
       <div className="flex items-center bg-blue-900 font-bold py-1 px-2 rounded-t-md">
-        <RiStarSFill size={'25px'} />
-        <p className="">Melhores ligas</p>
+        <RiStarSFill size={'20px'} />
+        <p className="text-sm">Melhores ligas</p>
       </div>
       <div className={`grid grid-cols-2 bg-[#646464] rounded-b-md`}>
         {company.bestLeagues.map((league) => (

@@ -85,9 +85,9 @@ export function GamesByBestLeague({ leagueId }: LeagueProps) {
 
   return (
     <div className={isWideVersion ? 'm-0' : 'm-1'}>
-      <div className="bg-blue-900 py-1 px-5 rounded-t-md">
-        <p className="font-bold">{league.name}</p>
-        <span>{/* Sport - Country */}</span>
+      <div className="bg-blue-900 h-12 py-1 px-5 rounded-t-md">
+        <p className="font-bold p-0 text-sm">{league.name}</p>
+        <span className="text-xs">Futebol - {league.name.split(':')[0]}</span>
       </div>
       <div>
         {league.matches && (
