@@ -6,10 +6,6 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  Box,
-  Flex,
-  HStack,
-  Text,
 } from '@chakra-ui/react'
 import { RiCloseLine } from 'react-icons/ri'
 
@@ -24,76 +20,61 @@ export function MultiBetSummary({ matches }: MultiBetSummaryProps) {
     <>
       {matches.length > 1 && (
         <Accordion allowToggle>
-          <AccordionItem>
-            <h2>
-              <AccordionButton p="0" pr="5">
-                <Box
-                  display="flex"
-                  py="4"
-                  flex="1"
-                  textAlign="left"
-                  fontWeight="bold"
-                  color="gray.900"
-                  fontSize="15px"
-                >
-                  <Box mx="5">
-                    <RiCloseLine
-                      onClick={() => handleRemoveAllMatches()}
-                      cursor="pointer"
-                    />
-                  </Box>
+          <AccordionItem className="border-none">
+            <AccordionButton p="0" pr="5">
+              <div className="flex flex-1 items-center text-sm text-zinc-900 font-bold text-left py-3">
+                <div className="px-3">
+                  <RiCloseLine
+                    onClick={() => handleRemoveAllMatches()}
+                    cursor="pointer"
+                    color="black"
+                  />
+                </div>
 
-                  {matches.length === 2 && <Text mr="2">Dupla</Text>}
-                  {matches.length === 3 && <Text mr="2">Tripla</Text>}
-                  {matches.length > 3 && (
-                    <Text mr="2">Multipla de {matches.length}</Text>
-                  )}
+                {matches.length === 2 && <p>Dupla</p>}
+                {matches.length === 3 && <p>Tripla</p>}
+                {matches.length > 3 && <p>Multipla de {matches.length}</p>}
 
-                  {/* <Text fontWeight="bold" color="blue.900" fontSize="15px">
+                {/* <Text fontWeight="bold" color="blue.900" fontSize="15px">
                     {Number(totalOdd) > 0 && `${totalOdd}`}
                   </Text> */}
-                </Box>
-                <AccordionIcon color="blue.900" />
-              </AccordionButton>
-            </h2>
-            <AccordionPanel p="0" maxH="300px" overflow="auto" bg="gray.200">
-              {matches.map((tipInfo) => (
-                <Flex
-                  color="gray.800"
-                  key={tipInfo.id}
-                  py="1"
-                  borderBottom="1px solid gray"
+              </div>
+              <AccordionIcon color="blue.900" />
+            </AccordionButton>
+            <AccordionPanel
+              p="0"
+              className="p-0 max-h-72 overflow-auto bg-zinc-200"
+            >
+              {matches.map((match) => (
+                <div
+                  className="flex text-zinc-700 py-1 border-b-[1px] border-solid"
+                  key={match.id}
                 >
-                  <Box mx="5" onClick={() => handleRemoveMatch(tipInfo)}>
+                  <div
+                    className="mx-3"
+                    onClick={() => handleRemoveMatch(match)}
+                  >
                     <RiCloseLine cursor="pointer" />
-                  </Box>
+                  </div>
                   <div>
-                    {tipInfo.market.map((market) => (
+                    {match.market.map((market) => (
                       <div key={market.id}>
-                        <HStack>
-                          <Text
-                            fontWeight="bold"
-                            color="gray.900"
-                            fontSize="15px"
-                          >
+                        <div className="flex space-x-2">
+                          <p className="font-bold text-sm text-zinc-900">
                             {market.option}
-                          </Text>
-                          <Text
-                            fontWeight="bold"
-                            color="blue.900"
-                            fontSize="15px"
-                          >
+                          </p>
+                          <p className="font-bold text-sm text-blue-900">
                             {market.odd}
-                          </Text>
-                        </HStack>
-                        <Text fontSize="11px">{market.name}</Text>
+                          </p>
+                        </div>
+                        <p className="text-xs text-zinc-600">{market.name}</p>
                       </div>
                     ))}
-                    <Text fontSize="11px">
-                      {tipInfo.localTeam} X {tipInfo.visitorTeam}
-                    </Text>
+                    <p className="text-xs text-zinc-600">
+                      {match.localTeam} X {match.visitorTeam}
+                    </p>
                   </div>
-                </Flex>
+                </div>
               ))}
             </AccordionPanel>
           </AccordionItem>

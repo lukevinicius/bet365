@@ -7,13 +7,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { useCompany } from '@/hooks/useCompany'
 
 import { api } from '@/services/api/axios'
-import {
-  Flex,
-  Spinner,
-  Stack,
-  useBreakpointValue,
-  useToast,
-} from '@chakra-ui/react'
+import { Spinner, useBreakpointValue, useToast } from '@chakra-ui/react'
 import { MultiBetSummary } from './MultiBetSummary'
 import { SingleBetSummary } from './SingleBetSummary'
 import { useState } from 'react'
@@ -89,26 +83,14 @@ export function BetSummary() {
         isOpen={isModalSignInOpen}
         onClose={() => setIsModalSignInOpen(false)}
       />
-      <Flex
-        pointerEvents="none"
-        pos="fixed"
-        bottom={isWideVersion ? '0px' : '70px'}
-        zIndex="5"
-        justifyContent="center"
-        alignItems="flex-end"
-        w="100%"
+      <div
+        className={`pointer-events-none flex w-full fixed ${
+          isWideVersion ? 'bottom-0' : 'bottom-16'
+        } z-10 justify-center items-end`}
       >
-        <Stack
-          maxW="450px"
-          zIndex="10"
-          flex="1"
-          spacing="0"
-          pos="relative"
-          pointerEvents="auto"
-          display="block"
-        >
+        <div className="w-full max-w-md z-10 relative pointer-events-auto">
           {/* Top of the modal */}
-          <Flex bgColor="gray.100" borderRadius="5px 5px 0 0" flexDir="column">
+          <div className="flex flex-col bg-zinc-300 rounded-t-md">
             {selectedMatch.length === 1 && (
               <SingleBetSummary
                 id={selectedMatch[0].id}
@@ -122,19 +104,16 @@ export function BetSummary() {
             {selectedMatch.length > 1 && (
               <MultiBetSummary matches={selectedMatch} />
             )}
-          </Flex>
+          </div>
 
           {/* Bottom of the modal */}
           <FormProvider {...createTicketForm}>
-            <form
-              onSubmit={handleSubmit(handleCreateTicket)}
-              className="flex w-full"
-            >
+            <form onSubmit={handleSubmit(handleCreateTicket)} className="flex">
               <input
                 {...register('stake')}
                 className={`w-1/2 ${
-                  !isWideVersion ? 'rounded-br-md' : 'rounded-0'
-                } shadow-sm px-3 py-2 text-zinc-800 focus:outline-none focus:ring-2`}
+                  !isWideVersion ? 'rounded-bl-md' : 'rounded-0 border-none'
+                } shadow-sm px-3 py-2 text-zinc-800 focus:outline-none focus:ring-0`}
                 placeholder="Valor da Aposta"
                 /* onChange={(e) => handleStakeChange(e.target.value)} */
               />
@@ -160,8 +139,8 @@ export function BetSummary() {
               </button>
             </form>
           </FormProvider>
-        </Stack>
-      </Flex>
+        </div>
+      </div>
     </>
   )
 }

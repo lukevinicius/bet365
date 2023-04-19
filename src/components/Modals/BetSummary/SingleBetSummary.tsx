@@ -1,6 +1,5 @@
 import { IMatch } from '@/domain/interfaces/IMatch'
 import { useBet } from '@/hooks/useBet'
-import { Flex, HStack, Text } from '@chakra-ui/react'
 import { RiCloseLine } from 'react-icons/ri'
 
 export function SingleBetSummary(match: IMatch) {
@@ -8,29 +7,27 @@ export function SingleBetSummary(match: IMatch) {
 
   return (
     <>
-      <Flex py="3" color="gray.800">
+      <div className="flex py-3">
         <div className="px-5" onClick={() => handleRemoveMatch(match)}>
-          <RiCloseLine cursor="pointer" />
+          <RiCloseLine cursor="pointer" color="black" />
         </div>
         <div>
           {match.market.map((market) => (
             <div key={market.id}>
-              <HStack>
-                <Text fontWeight="bold" color="gray.900" fontSize="15px">
+              <div className="flex space-x-2">
+                <p className="font-bold text-sm text-zinc-900">
                   {market.option}
-                </Text>
-                <Text fontWeight="bold" color="blue.900" fontSize="15px">
-                  {market.odd}
-                </Text>
-              </HStack>
-              <Text fontSize="11px">{market.name}</Text>
+                </p>
+                <p className="font-bold text-sm text-blue-900">{market.odd}</p>
+              </div>
+              <p className="text-xs text-zinc-600">{market.name}</p>
             </div>
           ))}
-          <Text fontSize="11px">
+          <p className="text-xs text-zinc-600">
             {match.localTeam} X {match.visitorTeam}
-          </Text>
+          </p>
         </div>
-      </Flex>
+      </div>
     </>
   )
 }
