@@ -1,10 +1,7 @@
 import { useState } from 'react'
 import {
   Avatar,
-  Flex,
-  Text,
   Button,
-  Stack,
   Link,
   useBreakpointValue,
   Icon,
@@ -34,7 +31,7 @@ export function Profile() {
   })
 
   return (
-    <Flex align="end">
+    <div className="items-end">
       {isWideVersion ? (
         <>
           <div className="mr-2 text-right">
@@ -71,7 +68,7 @@ export function Profile() {
           </Button>
         </>
       ) : (
-        <Stack className="text-center mr-2" spacing={0}>
+        <div className="text-center mr-2">
           <Button
             _focus={{ outline: 'none' }}
             variant="link"
@@ -79,13 +76,13 @@ export function Profile() {
           >
             <Avatar size="xs" name={user.name} />
           </Button>
-          <Text className="whitespace-nowrap text-xs" whiteSpace="nowrap">
+          <p className="whitespace-nowrap text-xs flex-nowrap">
             {user.wallet.balance.toLocaleString('pt-BR', {
               style: 'currency',
               currency: 'BRL',
             })}
-          </Text>
-        </Stack>
+          </p>
+        </div>
       )}
 
       <DrawerProfile
@@ -95,6 +92,6 @@ export function Profile() {
         type={user.role}
         onClose={() => setOpenModal(false)}
       />
-    </Flex>
+    </div>
   )
 }

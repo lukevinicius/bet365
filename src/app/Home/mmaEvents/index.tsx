@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import { formatTimeToUtc } from '@/utils/formatTimeToUtc'
 import { RiLockFill } from 'react-icons/ri'
 import { useBet } from '@/hooks/useBet'
-import { Spinner, Table, useBreakpointValue } from '@chakra-ui/react'
+import { Image, Spinner, Table, useBreakpointValue } from '@chakra-ui/react'
+import sport117 from '@/assets/images/sports/117.svg'
 
 interface IResponse {
   leagueId: string
@@ -61,16 +62,23 @@ export function EventsByMMA() {
   }, [])
 
   return (
-    <div>
+    <div className={isWideVersion ? 'm-0' : 'm-1'}>
       {loading ? (
         <div className="flex justify-center items-center">
           <Spinner />
         </div>
       ) : (
         <div>
-          <div className="bg-blue-900 h-12 py-1 px-5 rounded-t-md">
-            <p className="font-bold p-0 text-sm">{data.league}</p>
-            <span className="text-xs">MMA - {data.league.split(' ')[0]}</span>
+          <div className="flex bg-blue-900 h-12 py-1 px-5 rounded-t-md items-center">
+            <Image
+              src={sport117}
+              className="mr-2 h-[32px] w-[32px]"
+              alt="sport117"
+            />
+            <div>
+              <p className="font-bold p-0 text-sm">{data.league}</p>
+              <span className="text-xs">MMA - {data.league.split(' ')[0]}</span>
+            </div>
           </div>
           <Table>
             {data.matches &&

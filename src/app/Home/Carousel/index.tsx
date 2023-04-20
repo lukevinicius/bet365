@@ -10,8 +10,6 @@ import 'swiper/css/a11y'
 
 import { Image } from '@chakra-ui/react'
 
-import banner from './rsaBanner.png'
-
 interface CarouselProps {
   banners: {
     image: string
@@ -32,13 +30,15 @@ export function Carousel({ banners }: CarouselProps) {
       }}
       modules={[Pagination, Scrollbar, A11y]}
     >
-      <SwiperSlide>
-        <Image
-          className="w-full max-h-52 min-h-[170px]"
-          src={banner}
-          alt="banner model"
-        />
-      </SwiperSlide>
+      {banners.map((slider, index) => (
+        <SwiperSlide key={index}>
+          <Image
+            className="w-full max-h-52 min-h-[170px]"
+            src={slider.image}
+            alt={slider.link}
+          />
+        </SwiperSlide>
+      ))}
     </Swiper>
   )
 }
