@@ -2,7 +2,6 @@ import React from 'react'
 import { Footer } from '@/components/Footer'
 import { Sidebar } from '@/components/Siderbar'
 import { useAuth } from '@/hooks/useAuth'
-import { Link } from '@chakra-ui/react'
 import { BetSummary } from '@/components/Modals/BetSummary'
 import { useBet } from '@/hooks/useBet'
 
@@ -18,8 +17,12 @@ export function SportsRoutes({ children }: { children: React.ReactNode }) {
         user.token &&
         user.role === 'ADMIN' && (
           <div className="bg-gray-300 text-black flex py-2 px-5 space-x-4 items-center">
-            <Link href="/back-office">Painel</Link>
-            <Link href="#">Afiliados</Link>
+            <a href="/back-office" className="no-underline">
+              Painel
+            </a>
+            <a href="#" className="no-underline">
+              Afiliados
+            </a>
           </div>
         )}
       <div className="flex w-auto relative items-stretch h-full min-w-0">

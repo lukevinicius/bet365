@@ -6,18 +6,21 @@ interface ActiveLinkProps extends LinkProps {
 }
 
 export function ActiveLink({ children, ...rest }: ActiveLinkProps) {
-  // const pathname = usePathname()
+  const pathname = window.location.pathname
 
-  const isActive = false
+  let isActive = false
 
-  /* if (pathname === rest.href) {
+  if (pathname === rest.href) {
     isActive = true
-  } */
+  }
 
   return (
     <Link
       {...rest}
-      className={`pl-5 py-3 hover:bg-[#383838] ${isActive && 'font-bold'}`}
+      textDecoration="none"
+      className={`pl-5 py-3 hover:bg-gray.800 hover:no-underline ${
+        isActive && 'font-bold'
+      }`}
     >
       {children}
     </Link>

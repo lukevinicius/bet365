@@ -1,12 +1,11 @@
-import { Image, Spinner, Table, useBreakpointValue } from '@chakra-ui/react'
-import { api } from '@/services/api/axios'
-import { useBet } from '@/hooks/useBet'
 import { useEffect, useState } from 'react'
+import { api } from '@/services/api/axios'
 import { Link } from 'react-router-dom'
-import { RiLockFill } from 'react-icons/ri'
 import { formatTimeToUtc } from '@/utils/formatTimeToUtc'
-
-import sport2 from '@/assets/images/sports/2.svg'
+import { RiLockFill } from 'react-icons/ri'
+import { useBet } from '@/hooks/useBet'
+import { Image, Spinner, Table, useBreakpointValue } from '@chakra-ui/react'
+import sport117 from '@/assets/images/sports/117.svg'
 
 interface IResponse {
   leagueId: string
@@ -33,75 +32,79 @@ interface IResponse {
   }[]
 }
 
-export function BasketballBestLeagues() {
+export function EventsByBoxe() {
   const { selectedMatch, selectMarket } = useBet()
   const [data, setData] = useState<IResponse>({} as IResponse)
   const [loading, setLoading] = useState(true)
+
+  async function getEvents() {
+    const { data } = await api.get(`/boxe/find-leagues`)
+
+    await api
+      .get(`/boxe/matches-by-league`, {
+        params: {
+          leagueId: data[0].leagues[0].id,
+        },
+      })
+      .then((response) => {
+        setData(response.data)
+        setLoading(false)
+      })
+  }
 
   const isWideVersion = useBreakpointValue({
     base: true,
     lg: false,
   })
 
-  async function findMatches() {
-    const { data } = await api.get(`/basketball/matches-by-league`, {
-      params: {
-        leagueId: '1046',
-      },
-    })
-
-    setData({
-      leagueId: data.leagueId,
-      league: data.league,
-      matches: data.matches,
-    })
-    setLoading(false)
-  }
-
   useEffect(() => {
-    findMatches()
+    getEvents()
   }, [])
 
   return (
-    <div>
-      <div className={isWideVersion ? 'm-0' : 'm-1'}>
-        <div className="flex items-center bg-blue-900 h-12 py-1 px-5 rounded-t-md">
-          <Image src={sport2} className="mr-2 h-[32px] w-[32px]" alt="sport2" />
-          <div className="flex items-center justify-between">
-            <p className="font-bold">Basquete</p>
-          </div>
+    <div className={isWideVersion ? 'm-0' : 'm-1'}>
+      {loading ? (
+        <div className="flex justify-center items-center">
+          <Spinner />
         </div>
-        {loading ? (
-          <div className="flex justify-center items-center">
-            <Spinner />
+      ) : (
+        <div>
+          <div className="flex bg-blue-900 h-12 py-1 px-5 rounded-t-md items-center">
+            <Image
+              src={sport117}
+              className="mr-2 h-[32px] w-[32px]"
+              alt="sport117"
+            />
+            <div>
+              <p className="font-bold p-0 text-sm">{data.league}</p>
+              <span className="text-xs">
+                Boxe - {data.league.split(' ')[0]}
+              </span>
+            </div>
           </div>
-        ) : (
           <Table>
-            <thead>
-              <tr className="items-center border-b-[1px] h-8 border-[#6e6e6e] bg-[#B1B1B1]">
-                <th className="w-1/2 text-sm text-left text-gray-800 font-normal pl-2">
-                  {data.league}
-                </th>
-                <th className="w-1/6 text-sm text-center text-gray-800 font-semibold">
-                  {isWideVersion ? '1' : 'Casa'}
-                </th>
-                <th className="w-1/6 text-sm text-center text-gray-800 font-semibold">
-                  {isWideVersion ? '2' : 'Visitante'}
-                </th>
-              </tr>
-            </thead>
             {data.matches &&
               data.matches.map((match) => (
                 <>
-                  <tbody>
-                    <tr>
-                      <td className="bg-[#5f5f5f] text-sm text-[#c5c5c5] py-1 pl-2">
+                  <thead>
+                    <tr className="items-center border-b-[1px] h-8 border-[#6e6e6e] bg-[#B1B1B1]">
+                      <th className="w-1/2 text-sm text-left text-gray-800 font-normal pl-2">
                         {match.day}
-                      </td>
-                      <td className="bg-[#5f5f5f]"></td>
-                      <td className="bg-[#5f5f5f]"></td>
+                      </th>
+                      <th className="w-1/6 text-sm text-center text-gray-800 font-semibold">
+                        {isWideVersion ? '1' : 'Casa'}
+                      </th>
+                      {match.match[0].market.odds.length > 2 && (
+                        <th className="w-1/6 text-sm text-center text-gray-800 font-semibold">
+                          {isWideVersion ? 'X' : 'Empate'}
+                        </th>
+                      )}
+                      <th className="w-1/6 text-sm text-center text-gray-800 font-semibold">
+                        {isWideVersion ? '2' : 'Visitante'}
+                      </th>
                     </tr>
-
+                  </thead>
+                  <tbody>
                     {match.match.map((match) => (
                       <tr
                         key={match.id}
@@ -109,18 +112,20 @@ export function BasketballBestLeagues() {
                       >
                         {isWideVersion ? (
                           <td className="w-1/2  bg-[#646464] border-[#6e6e6e] border-r-[1px] pl-2">
-                            <p>{match.localTeam}</p>
-                            <p>{match.visitorTeam}</p>
-                            <p>{match.time} </p>
+                            <Link to="#" className="hover:text-[#FFDF1B]">
+                              <p>{match.localTeam}</p>
+                              <p>{match.visitorTeam}</p>
+                              <p>{match.time} </p>
+                            </Link>
                           </td>
                         ) : (
                           <td className="w-1/2 bg-[#646464] border-[#6e6e6e] border-r-[1px] pl-2">
                             <Link
                               to={`/sports/soccer/${data.leagueId}/${match.id}`}
-                              className="hover:text-[#FFDF1B] text-[#c5c5c5]"
+                              className="hover:text-[#FFDF1B]"
                             >
                               {match.time} -{' '}
-                              <span className="text-zinc-200 hover:text-[#FFDF1B]">
+                              <span>
                                 {match.localTeam} X {match.visitorTeam}
                               </span>
                             </Link>
@@ -130,18 +135,18 @@ export function BasketballBestLeagues() {
                           <td
                             key={odd.name}
                             className={`
-                                ${
-                                  selectedMatch.find(
-                                    (item) =>
-                                      item.id === match.id &&
-                                      item.market.find(
-                                        (market) => market.option === odd.name,
-                                      ),
-                                  )
-                                    ? 'bg-[#B1B1B1]'
-                                    : 'bg-[#5A5A5A] hover:bg-[#646464] border-r-[1px] border-[#6e6e6e]'
-                                }
-                              w-1/6 text-center text-[#FFDF1B] cursor-pointer`}
+                            ${
+                              selectedMatch.find(
+                                (item) =>
+                                  item.id === match.id &&
+                                  item.market.find(
+                                    (market) => market.option === odd.name,
+                                  ),
+                              )
+                                ? 'bg-[#B1B1B1]'
+                                : 'bg-[#5A5A5A] hover:bg-[#646464] border-r-[1px] border-[#6e6e6e]'
+                            }
+                          w-1/6 text-center text-[#FFDF1B] cursor-pointer`}
                             onClick={() => {
                               const market = [
                                 {
@@ -178,8 +183,8 @@ export function BasketballBestLeagues() {
                 </>
               ))}
           </Table>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }

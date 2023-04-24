@@ -10,6 +10,7 @@ import { useCompany } from '@/hooks/useCompany'
 import { EventsByMMA } from './mmaEvents'
 import { BasketballBestLeagues } from './BasketballBestLeagues'
 import { TennisBestLeagues } from './TennisBestLeagues'
+import { EventsByBoxe } from './boxeEvents'
 
 export function Home() {
   const { company } = useCompany()
@@ -34,7 +35,12 @@ export function Home() {
                 {company.banners && <Carousel banners={company.banners} />}
                 {isWideVersion && <SportsList />}
                 <MatchesInPlay />
-                {!isWideVersion && <EventsByMMA />}
+                {!isWideVersion && (
+                  <>
+                    <EventsByMMA />
+                    <EventsByBoxe />
+                  </>
+                )}
                 {isWideVersion && company.bestLeagues && (
                   <>
                     <GamesByBestLeague
@@ -61,7 +67,12 @@ export function Home() {
                 )}
                 <BasketballBestLeagues />
                 <TennisBestLeagues />
-                {isWideVersion && <EventsByMMA />}
+                {isWideVersion && (
+                  <>
+                    <EventsByMMA />
+                    <EventsByBoxe />
+                  </>
+                )}
               </div>
             </div>
           </aside>

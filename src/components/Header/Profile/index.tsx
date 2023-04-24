@@ -33,7 +33,7 @@ export function Profile() {
   return (
     <div className="items-end">
       {isWideVersion ? (
-        <>
+        <div className="flex">
           <div className="mr-2 text-right">
             <div className="flex items-center">
               <Icon
@@ -66,7 +66,7 @@ export function Profile() {
           >
             <Avatar size="sm" name={user.name} />
           </Button>
-        </>
+        </div>
       ) : (
         <div className="text-center mr-2">
           <Button
