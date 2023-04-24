@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { api } from '@/services/api/axios'
-import { Spinner, useBreakpointValue } from '@chakra-ui/react'
+import { useBreakpointValue } from '@chakra-ui/react'
 import { Desktop } from './Desktop'
 import { Mobile } from './Mobile'
 
@@ -54,7 +54,6 @@ interface IResponse {
 export function GamesByBestLeague({ leagueId }: LeagueProps) {
   const [league, setLeague] = useState<IResponse>({} as IResponse)
   const [allMatches, setAllMatches] = useState<IMatch[]>([])
-  const [loading, setLoading] = useState(true)
 
   async function getMatches() {
     await api
@@ -72,7 +71,6 @@ export function GamesByBestLeague({ leagueId }: LeagueProps) {
         setAllMatches(
           response.data.matches.map((match: any) => match.match).flat(),
         )
-        setLoading(false)
       })
   }
 
@@ -87,11 +85,7 @@ export function GamesByBestLeague({ leagueId }: LeagueProps) {
 
   return (
     <div className={isWideVersion ? 'm-0' : 'm-1'}>
-      {loading ? (
-        <div className="flex justify-center items-center">
-          <Spinner />
-        </div>
-      ) : (
+      {league && (
         <div>
           <div className="bg-blue-900 h-12 py-1 px-5 rounded-t-md">
             <p className="font-bold p-0 text-sm">{league.name}</p>
