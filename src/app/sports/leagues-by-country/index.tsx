@@ -7,9 +7,7 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-  Box,
   Link,
-  useBreakpointValue,
   Spinner,
 } from '@chakra-ui/react'
 import { api } from '@/services/api/axios'
@@ -35,11 +33,6 @@ export function LeaguesByCountry() {
       setLoading(false)
     })
   }
-
-  const isWideVersion = useBreakpointValue({
-    base: true,
-    lg: false,
-  })
 
   useEffect(() => {
     findLeagues()
@@ -67,15 +60,11 @@ export function LeaguesByCountry() {
                       bg: '#838383',
                     }}
                   >
-                    <Box as="span" flex="1" textAlign="left">
-                      {country.countryName}
-                    </Box>
+                    <span>{country.countryName}</span>
                     <AccordionIcon />
                   </AccordionButton>
                   <AccordionPanel
-                    className={`grid ${
-                      isWideVersion ? 'grid-cols-1' : 'grid-cols-3'
-                    } py-2 bg-[#646464]`}
+                    className={`grid grid-cols-1 lg:grid-cols-3 py-2 bg-[#646464]`}
                   >
                     {country.leagues.map((league) => (
                       <Link

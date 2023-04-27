@@ -1,9 +1,8 @@
-import { Image } from '@chakra-ui/react'
+import { Image, useBreakpointValue } from '@chakra-ui/react'
 
 import curacaoLogo from '@/assets/images/curacao.png'
 import ageSvg from '@/assets/images/footer/18.svg'
 import { useCompany } from '@/hooks/useCompany'
-import { useBreakpointValue } from '@chakra-ui/react'
 
 export function Complience() {
   const { company } = useCompany()
@@ -27,7 +26,7 @@ export function Complience() {
           className={`${isWideVersion ? 'w-full' : 'w-full'}`}
         />
       </div>
-      <div className={`w-11/12  ${isWideVersion && 'text-[0.6rem]'}`}>
+      <div className="w-11/12 text-xs lg:text-sm">
         <p className="text-justify">
           {company.name} é um website de entretenimento online que oferece a
           seus usuários uma experiência única em Apostas Esportivas.

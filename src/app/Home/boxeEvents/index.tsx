@@ -1,17 +1,21 @@
 import { useEffect, useState } from 'react'
 import { api } from '@/services/api/axios'
-import { Link } from 'react-router-dom'
 import { formatTimeToUtc } from '@/utils/formatTimeToUtc'
-import { RiLockFill } from 'react-icons/ri'
+import { RiLoader2Fill, RiLockFill } from 'react-icons/ri'
 import { useBet } from '@/hooks/useBet'
-import { Image, Spinner, Table, useBreakpointValue } from '@chakra-ui/react'
+import { Image, useBreakpointValue } from '@chakra-ui/react'
 import sport117 from '@/assets/images/sports/117.svg'
+import dayjs from 'dayjs'
+import calendar from 'dayjs/plugin/calendar'
+import 'dayjs/locale/pt-br'
+
+dayjs.extend(calendar)
 
 interface IResponse {
   leagueId: string
   league: string
   matches: {
-    day: string
+    day: Date
     match: {
       id: string
       localTeam: string
@@ -62,14 +66,14 @@ export function EventsByBoxe() {
   }, [])
 
   return (
-    <div className={isWideVersion ? 'm-0' : 'm-1'}>
+    <div className={'w-full px-1 pb-1'}>
       {loading ? (
         <div className="flex justify-center items-center">
-          <Spinner />
+          <RiLoader2Fill className="animate-spin text-4xl" />
         </div>
       ) : (
-        <div>
-          <div className="flex bg-blue-900 h-12 py-1 px-5 rounded-t-md items-center">
+        <>
+          <div className="flex bg-blue-900 h-12 py-1 rounded-t-md items-center">
             <Image
               src={sport117}
               className="mr-2 h-[32px] w-[32px]"
@@ -82,108 +86,93 @@ export function EventsByBoxe() {
               </span>
             </div>
           </div>
-          <Table>
-            {data.matches &&
-              data.matches.map((match) => (
-                <>
-                  <thead>
-                    <tr className="items-center border-b-[1px] h-8 border-[#6e6e6e] bg-[#B1B1B1]">
-                      <th className="w-1/2 text-sm text-left text-gray-800 font-normal pl-2">
-                        {match.day}
-                      </th>
-                      <th className="w-1/6 text-sm text-center text-gray-800 font-semibold">
-                        {isWideVersion ? '1' : 'Casa'}
-                      </th>
-                      {match.match[0].market.odds.length > 2 && (
-                        <th className="w-1/6 text-sm text-center text-gray-800 font-semibold">
-                          {isWideVersion ? 'X' : 'Empate'}
-                        </th>
+          {data.matches &&
+            data.matches.map((match) => (
+              <>
+                <div className="flex items-center border-b-[1px] h-8 border-[#6e6e6e] bg-[#A0A0A0]">
+                  <div className="w-1/2 text-sm text-left text-gray-800 font-normal pl-2">
+                    {/* Format to PT-BR */}
+                    {dayjs(match.day).locale('pt-br').calendar(null, {
+                      sameDay: '[Hoje]',
+                      nextDay: '[Amanhã]',
+                      sameElse: 'DD/MM/YYYY',
+                    })}
+                  </div>
+                </div>
+                {match.match.map((match) => (
+                  <div
+                    key={match.id}
+                    className="flex border-b-[1px] border-[#6e6e6e]"
+                  >
+                    <div className="w-1/2 items-center bg-[#646464] border-[#A0A0A0] border-r-[1px] pl-2">
+                      {isWideVersion ? (
+                        <div className="h-16">
+                          <p className="text-sm">{match.localTeam}</p>
+                          <p className="text-sm">{match.visitorTeam}</p>
+                          <p className="text-sm">{match.time}</p>
+                        </div>
+                      ) : (
+                        <div className="flex h-10 items-center">
+                          {match.time} -{' '}
+                          <span>
+                            {match.localTeam} x {match.visitorTeam}
+                          </span>
+                        </div>
                       )}
-                      <th className="w-1/6 text-sm text-center text-gray-800 font-semibold">
-                        {isWideVersion ? '2' : 'Visitante'}
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {match.match.map((match) => (
-                      <tr
-                        key={match.id}
-                        className="border-b-[1px] h-10 border-[#6e6e6e]"
+                    </div>
+                    {match.market.odds.map((odd) => (
+                      <div
+                        key={odd.name}
+                        className={`
+                      ${
+                        selectedMatch.find(
+                          (item) =>
+                            item.id === match.id &&
+                            item.market.find(
+                              (market) => market.option === odd.name,
+                            ),
+                        )
+                          ? 'bg-[#B1B1B1]'
+                          : 'bg-[#5A5A5A] hover:bg-[#646464] border-r-[1px] border-[#6e6e6e]'
+                      }
+                      ${
+                        match.market.odds.length > 2 ? 'w-1/6' : 'w-1/4'
+                      } flex items-center justify-center text-[#FFDF1B] cursor-pointer`}
+                        onClick={() => {
+                          const market = [
+                            {
+                              id: match.market.id,
+                              name: match.market.name,
+                              option: odd.name,
+                              odd: odd.value,
+                            },
+                          ]
+                          odd.stop !== 'true' &&
+                            selectMarket({
+                              id: match.id,
+                              leagueId: data.leagueId,
+                              localTeam: match.localTeam,
+                              visitorTeam: match.visitorTeam,
+                              date: formatTimeToUtc(
+                                match.date,
+                                match.time,
+                              ).toDate(),
+                              market,
+                            })
+                        }}
                       >
-                        {isWideVersion ? (
-                          <td className="w-1/2  bg-[#646464] border-[#6e6e6e] border-r-[1px] pl-2">
-                            <Link to="#" className="hover:text-[#FFDF1B]">
-                              <p>{match.localTeam}</p>
-                              <p>{match.visitorTeam}</p>
-                              <p>{match.time} </p>
-                            </Link>
-                          </td>
+                        {odd.stop === 'true' ? (
+                          <RiLockFill />
                         ) : (
-                          <td className="w-1/2 bg-[#646464] border-[#6e6e6e] border-r-[1px] pl-2">
-                            <Link
-                              to={`/sports/soccer/${data.leagueId}/${match.id}`}
-                              className="hover:text-[#FFDF1B]"
-                            >
-                              {match.time} -{' '}
-                              <span>
-                                {match.localTeam} X {match.visitorTeam}
-                              </span>
-                            </Link>
-                          </td>
+                          <p>{odd.value}</p>
                         )}
-                        {match.market.odds.map((odd) => (
-                          <td
-                            key={odd.name}
-                            className={`
-                            ${
-                              selectedMatch.find(
-                                (item) =>
-                                  item.id === match.id &&
-                                  item.market.find(
-                                    (market) => market.option === odd.name,
-                                  ),
-                              )
-                                ? 'bg-[#B1B1B1]'
-                                : 'bg-[#5A5A5A] hover:bg-[#646464] border-r-[1px] border-[#6e6e6e]'
-                            }
-                          w-1/6 text-center text-[#FFDF1B] cursor-pointer`}
-                            onClick={() => {
-                              const market = [
-                                {
-                                  id: match.market.id,
-                                  name: match.market.name,
-                                  option: odd.name,
-                                  odd: odd.value,
-                                },
-                              ]
-                              odd.stop !== 'true' &&
-                                selectMarket({
-                                  id: match.id,
-                                  leagueId: data.leagueId,
-                                  localTeam: match.localTeam,
-                                  visitorTeam: match.visitorTeam,
-                                  date: formatTimeToUtc(
-                                    match.date,
-                                    match.time,
-                                  ).toDate(),
-                                  market,
-                                })
-                            }}
-                          >
-                            {odd.stop === 'true' ? (
-                              <RiLockFill />
-                            ) : (
-                              <p>{odd.value}</p>
-                            )}
-                          </td>
-                        ))}
-                      </tr>
+                      </div>
                     ))}
-                  </tbody>
-                </>
-              ))}
-          </Table>
-        </div>
+                  </div>
+                ))}
+              </>
+            ))}
+        </>
       )}
     </div>
   )

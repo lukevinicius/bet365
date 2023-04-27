@@ -1,18 +1,12 @@
 import { Link } from 'react-router-dom'
 import { useCompany } from '@/hooks/useCompany'
 import { RiStarSFill } from 'react-icons/ri'
-import { useBreakpointValue } from '@chakra-ui/react'
 
 export function BestLeagues() {
   const { company } = useCompany()
 
-  const isWideVersion = useBreakpointValue({
-    base: true,
-    lg: false,
-  })
-
   return (
-    <div className={isWideVersion ? 'm-0' : 'm-1'}>
+    <div className="w-full px-1 pb-1">
       <div className="flex items-center bg-blue-900 font-bold py-1 px-2 rounded-t-md">
         <RiStarSFill size={'20px'} />
         <p className="text-sm">Melhores ligas</p>

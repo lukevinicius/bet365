@@ -20,7 +20,7 @@ interface SoccerInplayHomeProps {
       id: string
       name: string
       stop: string
-      odds: {
+      /* odds: {
         name: string
         odd?: string
         stop: string
@@ -29,7 +29,7 @@ interface SoccerInplayHomeProps {
           odd: string
           stop: string
         }[]
-      }[]
+      }[] */
     }[]
   }[]
 }
@@ -62,7 +62,7 @@ export function SoccerInplayHome({ matches }: SoccerInplayHomeProps) {
               </div>
             </div>
           </div>
-          <div className="flex w-1/2 h-16 bg-[#5a5a5a] text-[#ffdf1b]">
+          {/* <div className="flex w-1/2 h-16 bg-[#5a5a5a] text-[#ffdf1b]">
             <p className="flex w-1/3 p-1 items-center justify-center border-r-[1px] border-[#6e6e6e]">
               {match.market[0].odds[0].odd}
             </p>
@@ -72,7 +72,7 @@ export function SoccerInplayHome({ matches }: SoccerInplayHomeProps) {
             <p className="flex w-1/3 p-1 items-center justify-center border-r-[1px] border-[#6e6e6e]">
               {match.market[0].odds[2].odd}
             </p>
-          </div>
+          </div> */}
         </div>
       ))}
     </div>

@@ -26,8 +26,10 @@ export function Home() {
         <div className={`sticky overflow-auto w-full overscroll-none`}>
           <aside className="shadow-[0 0 20px rgba(0,0,0,0.05)] w-full">
             <div
-              className={`bg-[rgb(61,61,61)] grid ${
-                isWideVersion ? 'grid-cols-1' : 'grid-cols-2'
+              className={` grid ${
+                isWideVersion
+                  ? 'grid-cols-1 bg-[#5a5a5a]'
+                  : 'grid-cols-2 bg-[rgb(61,61,61)]'
               }
                 `}
             >
