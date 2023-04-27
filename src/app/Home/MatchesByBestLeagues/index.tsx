@@ -85,7 +85,7 @@ export function GamesByBestLeague({ leagueId }: LeagueProps) {
 
   return (
     <div className={isWideVersion ? 'm-0' : 'm-1'}>
-      {league && (
+      {league.leagueId && (
         <div>
           <div className="bg-blue-900 h-12 py-1 px-5 rounded-t-md">
             <p className="font-bold p-0 text-sm">{league.name}</p>
