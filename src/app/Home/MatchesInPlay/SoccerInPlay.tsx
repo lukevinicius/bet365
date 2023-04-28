@@ -1,3 +1,5 @@
+import { RiLockFill } from 'react-icons/ri'
+
 interface SoccerInplayHomeProps {
   matches: {
     id: string
@@ -20,7 +22,7 @@ interface SoccerInplayHomeProps {
       id: string
       name: string
       stop: string
-      /* odds: {
+      odds: {
         name: string
         odd?: string
         stop: string
@@ -29,12 +31,21 @@ interface SoccerInplayHomeProps {
           odd: string
           stop: string
         }[]
-      }[] */
+      }[]
     }[]
   }[]
 }
 
 export function SoccerInplayHome({ matches }: SoccerInplayHomeProps) {
+  const newMatches = matches.map((match) => {
+    const market = match.market.filter((market) => market.id === '1777')
+
+    return {
+      ...match,
+      market,
+    }
+  })
+
   return (
     <div>
       <div className="flex items-center border-b-[1px] border-[#6e6e6e] bg-[#a0a0a0] font-bold text-sm">
@@ -45,7 +56,7 @@ export function SoccerInplayHome({ matches }: SoccerInplayHomeProps) {
           <p className="w-1/3">2</p>
         </div>
       </div>
-      {matches.map((match) => (
+      {newMatches.map((match) => (
         <div className="flex border-b-[1px] border-[#6e6e6e]" key={match.id}>
           <div className="w-1/2 h-16 py-1 px-3 border-r-[1px] border-[#6e6e6e] bg-[#646464]">
             <div className="flex space-x-3 items-center">
@@ -62,17 +73,32 @@ export function SoccerInplayHome({ matches }: SoccerInplayHomeProps) {
               </div>
             </div>
           </div>
-          {/* <div className="flex w-1/2 h-16 bg-[#5a5a5a] text-[#ffdf1b]">
-            <p className="flex w-1/3 p-1 items-center justify-center border-r-[1px] border-[#6e6e6e]">
-              {match.market[0].odds[0].odd}
-            </p>
-            <p className="flex w-1/3 p-1 items-center justify-center border-r-[1px] border-[#6e6e6e]">
-              {match.market[0].odds[1].odd}
-            </p>
-            <p className="flex w-1/3 p-1 items-center justify-center border-r-[1px] border-[#6e6e6e]">
-              {match.market[0].odds[2].odd}
-            </p>
-          </div> */}
+          {match.market[0].id && (
+            <div className="flex w-1/2 h-16 bg-[#5a5a5a] text-[#ffdf1b]">
+              <p className="flex w-1/3 p-1 items-center justify-center border-r-[1px] border-[#6e6e6e]">
+                {/* ODD em decimal */}
+                {match.market[0].odds[0].stop !== '0' ? (
+                  <RiLockFill className="text-[#ffdf1b]" />
+                ) : (
+                  match.market[0].odds[0].odd
+                )}
+              </p>
+              <p className="flex w-1/3 p-1 items-center justify-center border-r-[1px] border-[#6e6e6e]">
+                {match.market[0].odds[0].stop !== '0' ? (
+                  <RiLockFill className="text-[#ffdf1b]" />
+                ) : (
+                  match.market[0].odds[1].odd
+                )}
+              </p>
+              <p className="flex w-1/3 p-1 items-center justify-center border-r-[1px] border-[#6e6e6e]">
+                {match.market[0].odds[0].stop !== '0' ? (
+                  <RiLockFill className="text-[#ffdf1b]" />
+                ) : (
+                  match.market[0].odds[2].odd
+                )}
+              </p>
+            </div>
+          )}
         </div>
       ))}
     </div>

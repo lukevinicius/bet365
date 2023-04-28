@@ -37,7 +37,9 @@ export function MatchesInPlay() {
         {/* <p className="text-[0.8rem]">267 Eventos {'>'}</p> */}
       </div>
       <div>
-        <SoccerInplayHome matches={matchesSoccer} />
+        {matchesSoccer.length > 0 && (
+          <SoccerInplayHome matches={matchesSoccer} />
+        )}
       </div>
     </div>
   )
