@@ -20,6 +20,7 @@ import { ModalSignIn } from './ModalSignIn'
 import { Profile } from './Profile'
 import { ActiveLink } from './ActiveLink'
 import { RiMenuLine } from 'react-icons/ri'
+import { translate } from '@/utils/translations'
 
 export function Header() {
   const { user } = useAuth()
@@ -40,7 +41,7 @@ export function Header() {
       <header
         className={`flex w-full mx-auto justify-center bg-blue-900 ${
           isWideVersion ? 'h-[70px]' : 'h-[50px]'
-        } laptop:px-2`}
+        } lg:px-2`}
       >
         {!isWideVersion ? (
           <div className="flex flex-wrap w-full items-center">
@@ -58,7 +59,7 @@ export function Header() {
 
             <div className="w-1/5 text-center">
               <ActiveLink className="w-1/5" href="/#">
-                <p className="text-sm">Ao Vivo</p>
+                <p className="text-sm">{translate['pt-br'].inPlay}</p>
               </ActiveLink>
             </div>
 
@@ -86,7 +87,7 @@ export function Header() {
                     as={Link}
                     to="/sign-up"
                   >
-                    Registrar
+                    {translate['pt-br'].register}
                   </Button>
                 </div>
                 <div className="flex w-1/5 justify-center">
@@ -95,7 +96,7 @@ export function Header() {
                     size="sm"
                     onClick={() => setIsModalSignInOpen(true)}
                   >
-                    Login
+                    {translate['pt-br'].login}
                   </Button>
                 </div>
               </>
@@ -175,7 +176,7 @@ export function Header() {
                     size="sm"
                     colorScheme="orange"
                   >
-                    Registra-se
+                    {translate['pt-br'].register}
                   </Button>
                   <Button
                     className="text-sm font-medium"
@@ -183,7 +184,7 @@ export function Header() {
                     size="sm"
                     onClick={() => setIsModalSignInOpen(true)}
                   >
-                    Login
+                    {translate['pt-br'].login}
                   </Button>
                 </div>
               )}

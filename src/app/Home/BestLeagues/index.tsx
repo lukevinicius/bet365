@@ -6,7 +6,7 @@ export function BestLeagues() {
   const { company } = useCompany()
 
   return (
-    <div className="w-full px-1 pb-1">
+    <div className="w-full px-1 py-1">
       <div className="flex items-center bg-blue-900 font-bold py-1 px-2 rounded-t-md">
         <RiStarSFill size={'20px'} />
         <p className="text-sm">Melhores ligas</p>

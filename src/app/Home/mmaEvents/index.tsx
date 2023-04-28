@@ -83,7 +83,7 @@ export function EventsByMMA() {
           </div>
           {data.matches &&
             data.matches.map((match) => (
-              <>
+              <div key={match.day.toString()}>
                 <div className="flex items-center border-b-[1px] h-8 border-[#6e6e6e] bg-[#A0A0A0]">
                   <div className="w-1/2 text-sm text-left text-gray-800 font-normal pl-2">
                     {match.day}
@@ -160,7 +160,7 @@ export function EventsByMMA() {
                     ))}
                   </div>
                 ))}
-              </>
+              </div>
             ))}
         </>
       )}

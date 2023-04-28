@@ -82,7 +82,7 @@ export function BasketballBestLeagues() {
           </div>
           {data.matches &&
             data.matches.map((match) => (
-              <>
+              <div key={match.day.toString()}>
                 <div className="bg-[#5f5f5f] text-sm text-[#c5c5c5] py-1 pl-2">
                   {match.day}
                 </div>
@@ -158,7 +158,7 @@ export function BasketballBestLeagues() {
                     ))}
                   </div>
                 ))}
-              </>
+              </div>
             ))}
         </>
       )}

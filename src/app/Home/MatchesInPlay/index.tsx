@@ -3,17 +3,18 @@ import { io } from 'socket.io-client'
 import { useEffect, useState } from 'react'
 
 export function MatchesInPlay() {
-  const [matches, setMatches] = useState([])
+  const [matchesSoccer, setMatchesSoccer] = useState([])
 
   async function connectSocket() {
     const socket = await io('http://localhost:3333')
 
-    socket.on('soccer/in-play', (data) => {
-      setMatches(data)
-    })
-
     socket.on('connect', () => {
       console.log('Socket connected')
+    })
+
+    // Receber os dados do socket
+    socket.on('soccer/in-play', (data) => {
+      setMatchesSoccer(data)
     })
 
     socket.on('disconnect', () => {
@@ -32,7 +33,7 @@ export function MatchesInPlay() {
         {/* <p className="text-[0.8rem]">267 Eventos {'>'}</p> */}
       </div>
       <div>
-        <SoccerInplayHome matches={matches} />
+        <SoccerInplayHome matches={matchesSoccer} />
       </div>
     </div>
   )
