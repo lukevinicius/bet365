@@ -6,7 +6,11 @@ export function MatchesInPlay() {
   const [matchesSoccer, setMatchesSoccer] = useState([])
 
   async function connectSocket() {
-    const socket = await io('http://localhost:3333')
+    const socket = await io(
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3333'
+        : 'https://api.rsa.bet',
+    )
 
     socket.on('connect', () => {
       console.log('Socket connected')
